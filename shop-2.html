@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhinav Fast Food | Burger, Pizza & More</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- FAST FOOD THEME CSS --- */
+        :root {
+            --primary: #ff4757; /* Red for appetite */
+            --secondary: #ffa502; /* Yellow for energy */
+            --dark: #2f3542;
+            --light: #f1f2f6;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fredoka One', cursive; /* Playful font for fast food */
+        }
+
+        /* Navbar */
+        header {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cart-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 10%;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-btn {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            background: #eccc68;
+            transform: scale(1.05);
+        }
+
+        /* Categories */
+        .category-section {
+            padding: 50px 5%;
+            text-align: center;
+        }
+
+        .cat-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .cat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 150px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cat-box:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-10px);
+        }
+
+        .cat-box i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .cat-box:hover i {
+            color: white;
+        }
+
+        /* Popular Menu */
+        .menu-section {
+            padding: 50px 5%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .food-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .food-info {
+            padding: 20px;
+        }
+
+        .food-info h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .stars {
+            color: var(--secondary);
+            margin: 5px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .add-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Special Offer */
+        .offer-banner {
+            background: linear-gradient(45deg, #ff4757, #ff6b81);
+            margin: 50px 5%;
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .offer-text h2 {
+            font-size: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .cat-container { gap: 15px; }
+            .nav-links { display: none; } /* Hide menu on small screens for simplicity */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-hamburger"></i> Abhinav Fast Food</div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="#menu">Menu</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Order</a>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>Are You Hungry?</h1>
+        <p>Don't wait! Best Burgers & Pizzas in Town.</p>
+        <a href="#menu" class="cta-btn">Order Now <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <section class="category-section" id="categories">
+        <h2>What's on your mind?</h2>
+        <div class="cat-container">
+            <div class="cat-box">
+                <i class="fas fa-hamburger"></i>
+                <p>Burgers</p>
+            </div>
+            <div class="cat-box">
+                <i class="fas fa-pizza-slice"></i>
+                <p>Pizza</p>
+            </div>
+            <div class="cat-box">
+                <i class="fas fa-drumstick-bite"></i>
+                <p>Chicken</p>
+            </div>
+            <div class="cat-box">
+                <i class="fas fa-glass-cheers"></i>
+                <p>Drinks</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="offer-banner">
+        <div class="offer-text">
+            <h3>Weekend Deal</h3>
+            <h2>Flat 50% OFF</h2>
+            <p>On all Large Pizzas & Combos</p>
+        </div>
+        <div class="offer-img">
+            <i class="fas fa-gift" style="font-size: 5rem; opacity: 0.8;"></i>
+        </div>
+    </div>
+
+    <section class="menu-section" id="menu">
+        <h2 class="section-title">Popular <span>Dishes</span></h2>
+        
+        <div class="food-grid">
+            <div class="food-card">
+                <span class="badge">Bestseller</span>
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" alt="Burger" class="food-img">
+                <div class="food-info">
+                    <h3>Maharaja Burger</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="desc">Double patty, extra cheese aur secret sauce.</p>
+                    <div class="price-row">
+                        <span class="price">₹120</span>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <span class="badge">Hot</span>
+                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" alt="Pizza" class="food-img">
+                <div class="food-info">
+                    <h3>Peppy Paneer Pizza</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="desc">Spicy paneer chunks with crispy capsicum.</p>
+                    <div class="price-row">
+                        <span class="price">₹249</span>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" alt="Fries" class="food-img">
+                <div class="food-info">
+                    <h3>Peri Peri Fries</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="desc">Crispy fries tossed in spicy peri-peri mix.</p>
+                    <div class="price-row">
+                        <span class="price">₹99</span>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1624726175512-19b9baf00ca9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" alt="Momos" class="food-img">
+                <div class="food-info">
+                    <h3>Fried Momos (8pcs)</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="desc">Kurkure fried momos with schezwan chutney.</p>
+                    <div class="price-row">
+                        <span class="price">₹80</span>
+                        <button class="add-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h3>Abhinav Fast Food Corner</h3>
+        <p>Shop No. 12, Main Market Road, Near City Park</p>
+        <p>Call for Delivery: +91 98765 43210</p>
+        <br>
+        <p>&copy; 2024. Good Food, Good Mood.</p>
+    </footer>
+
+    <script>
+        // Simple Add to Cart Interaction
+        const buttons = document.querySelectorAll('.add-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Item added to cart! (Demo)');
+            });
+        });
+    </script>
+</body>
+</html>

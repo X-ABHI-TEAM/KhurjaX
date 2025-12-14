@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KhurjaX Team | The Visionaries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLING --- */
+        :root {
+            --primary: #007bff; /* Professional Blue */
+            --secondary: #ff9800; /* Energetic Orange */
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        /* Utility */
+        .container {
+            width: 85%;
+            margin: auto;
+            max-width: 1200px;
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+        .section-title span { color: var(--primary); }
+
+        /* Header/Hero */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(255, 152, 0, 0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 10px;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.2);
+        }
+
+        .member-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid var(--secondary);
+            transition: 0.3s;
+        }
+        .team-member:hover .member-img {
+            border-color: var(--primary);
+        }
+
+        .member-details h3 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        .member-details p {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin: 0 8px;
+            transition: 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Vision Section */
+        .vision-section {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0;
+            margin-top: 50px;
+        }
+        .vision-content {
+            text-align: center;
+            padding: 0 10%;
+        }
+        .vision-content h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .vision-content p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>KHURJA<span>X</span> TEAM</h1>
+        <p>Innovation. Dedication. Excellence.</p>
+    </section>
+
+    <section class="team-members">
+        <div class="container">
+            <h2 class="section-title">Meet Our <span>Core</span> Members</h2>
+            <div class="team-grid">
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60" class="member-img" alt="Abhinav">
+                    <div class="member-details">
+                        <h3>Abhinav Singh</h3>
+                        <p>Founder & CEO (The Visionary)</p>
+                        <p>Leads the team with strategic brilliance and passion.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60" class="member-img" alt="Priya">
+                    <div class="member-details">
+                        <h3>Priya Sharma</h3>
+                        <p>Chief Technology Officer (CTO)</p>
+                        <p>Drives all technical developments and innovations.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1599566150163-471279d46f39?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60" class="member-img" alt="Rohit">
+                    <div class="member-details">
+                        <h3>Rohit Verma</h3>
+                        <p>Head of Marketing & Outreach</p>
+                        <p>Connects KhurjaX to the world and manages branding.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1506794778202-dfa79950d99d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60" class="member-img" alt="Aarav">
+                    <div class="member-details">
+                        <h3>Aarav Gupta</h3>
+                        <p>Operations Manager (The Organizer)</p>
+                        <p>Ensures smooth functioning and timely execution of projects.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-section">
+        <div class="container vision-content">
+            <h2>Our Collective Vision</h2>
+            <p>
+                KhurjaX team ka lakshya Khurja ke local talent ko global platform dena hai. Hum technology aur innovation ke zariye Khurja ko ek naya pehchaan dilana chahte hain. We are not just a team, we are a movement!
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 KhurjaX Team. Together We Rise. <i class="fas fa-rocket"></i></p>
+    </footer>
+
+</body>
+</html>

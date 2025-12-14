@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhinav Golgapa | The Best Pani Puri in Town</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLING --- */
+        :root {
+            --primary: #e67e22; /* Orange color for appetite */
+            --secondary: #27ae60; /* Green for freshness */
+            --dark: #2c3e50;
+            --light: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Navbar */
+        header {
+            background: var(--dark);
+            color: #fff;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1599307767316-77f8ca18eb00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #d35400;
+            transform: scale(1.05);
+        }
+
+        /* Menu Section */
+        .section {
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-img {
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .menu-details {
+            padding: 20px;
+        }
+
+        .menu-details h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: #fff8e1;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .feature-box {
+            flex: 1 1 300px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-box i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .footer {
+            background: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            nav ul { display: none; } /* Simplified for single file */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Abhinav Golgapa</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#features">Specials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Swad Aisa, Yaad Rahe Hamesha!</h1>
+        <p>Crunchy Puri, Teekha Pani, aur Abhinav ka Pyaar.</p>
+        <a href="#menu" class="btn">View Menu <i class="fas fa-utensils"></i></a>
+    </section>
+
+    <section id="features" class="section features">
+        <h2 class="section-title">Humare Yahan Kyun Khayein?</h2>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <i class="fas fa-hand-sparkles"></i>
+                <h3>100% Hygienic</h3>
+                <p>Hum safai ka khaas dhyan rakhte hain. Gloves aur caps ka upyog hamesha.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-tint"></i>
+                <h3>RO Water</h3>
+                <p>Sirf filtered RO paani ka istemal, taki aapki sehat rahe mast.</p>
+            </div>
+            <div class="feature-box">
+                <i class="fas fa-mortar-pestle"></i>
+                <h3>Ghar ka Masala</h3>
+                <p>Bazaar ka nahi, humara khud ka banaya hua special chatpata masala.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section">
+        <h2 class="section-title">Humara Chatpata Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-img" style="background-image: url('https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');"></div>
+                <div class="menu-details">
+                    <h3>Classic Pani Puri</h3>
+                    <span class="price">₹20 (6 Pcs)</span>
+                    <p>Teekha aur Meetha paani ke saath crispy puri.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-img" style="background-image: url('https://media.istockphoto.com/id/1317631355/photo/dahi-puri-chat-is-an-indian-roadside-snack-item-which-is-especially-popular-in-the-state-of.jpg?s=612x612&w=0&k=20&c=6XkGk_n-5y7Hk54Fk_Fk3_Fk3_Fk3'); background-color: #eee;"></div>
+                <div class="menu-details">
+                    <h3>Dahi Puri</h3>
+                    <span class="price">₹40 (Plate)</span>
+                    <p>Thanda dahi, sev, aur anar ke saath bharpoor swad.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-img" style="background-image: url('https://t3.ftcdn.net/jpg/04/01/63/03/360_F_401630321_s1s1s1s1.jpg'); background-color: #eee;"></div>
+                <div class="menu-details">
+                    <h3>Sev Puri</h3>
+                    <span class="price">₹30 (Plate)</span>
+                    <p>Papdi par aloo, chutneys aur dher saara sev.</p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-img" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');"></div>
+                <div class="menu-details">
+                    <h3>Masala Puri</h3>
+                    <span class="price">₹30 (Plate)</span>
+                    <p>Garam matar gravy ke saath crush ki gayi puri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2 class="section-title" style="color: #fff; border-color: #fff;">Visit Us Today!</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                <p>Main Market Chowk, Near City Park,<br>Sector 4, [Aapka Shahar]</p>
+            </div>
+            <div class="contact-info">
+                <h3><i class="fas fa-phone-alt"></i> Contact</h3>
+                <p>+91 98765 43210</p>
+                <p>abhinavgolgapa@gmail.com</p>
+            </div>
+            <div class="contact-info">
+                <h3><i class="fas fa-clock"></i> Timings</h3>
+                <p>Mon - Sun: 4:00 PM - 10:00 PM</p>
+            </div>
+        </div>
+        <br><br>
+        <a href="tel:+919876543210" class="btn" style="background: #25d366;"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Abhinav Golgapa. Made with <i class="fas fa-heart" style="color: red;"></i> for Food Lovers.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling script
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

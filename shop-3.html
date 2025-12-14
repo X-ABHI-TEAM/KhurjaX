@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhinav Pizza Studio | Hot & Cheesy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Yellowtail&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- PIZZA DARK THEME CSS --- */
+        :root {
+            --primary: #ffca40; /* Cheesy Yellow */
+            --accent: #ff4757; /* Tomato Red */
+            --dark: #121212; /* Dark Background */
+            --card-bg: #1e1e1e;
+            --text: #f1f2f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+        }
+
+        /* Navbar */
+        header {
+            background: rgba(0,0,0,0.9);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .logo {
+            font-family: 'Yellowtail', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            background: var(--accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+
+        .hero span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: #ddd;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 60px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .pizza-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pizza-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .pizza-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(255, 202, 64, 0.1);
+        }
+
+        .veg-mark {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            background-color: green; /* Green for Veg, Red for Non-veg */
+            border-radius: 50%;
+            display: block;
+        }
+        .non-veg .dot { background-color: red; }
+
+        .pizza-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .pizza-info {
+            padding: 20px;
+        }
+
+        .pizza-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .ingredients {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .size-select {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .size-btn {
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .size-btn.active {
+            background: var(--primary);
+            color: black;
+            border-color: var(--primary);
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .add-cart {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .add-cart:hover {
+            background: #c0392b;
+        }
+
+        /* Banner */
+        .cheese-banner {
+            background: var(--primary);
+            color: black;
+            text-align: center;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        .cheese-banner h2 { font-family: 'Yellowtail', cursive; font-size: 3rem; }
+
+        /* Footer */
+        footer {
+            background: black;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .pizza-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-pizza-slice"></i> Abhinav Pizza</div>
+        <a href="#contact" class="nav-btn">Call Now</a>
+    </header>
+
+    <section class="hero">
+        <h1>Slice of <br> <span>Heaven</span></h1>
+        <p>Wood Fired • Fresh Dough • Hand Tossed</p>
+        <a href="#menu" class="nav-btn" style="background: var(--primary); color: black;">View Menu</a>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="section-header">
+            <h2>Classic Veg Pizzas</h2>
+            <p>Loaded with fresh cheese and crunchy veggies</p>
+        </div>
+
+        <div class="pizza-grid">
+            <div class="pizza-card">
+                <div class="veg-mark"><span class="dot"></span></div>
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="pizza-img" alt="Margherita">
+                <div class="pizza-info">
+                    <h3>Classic Margherita</h3>
+                    <p class="ingredients">100% Mozzarella Cheese, Tomato Sauce, Basil.</p>
+                    <div class="size-select">
+                        <span class="size-btn">Reg</span>
+                        <span class="size-btn active">Med</span>
+                        <span class="size-btn">Lrg</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">₹199</span>
+                        <button class="add-cart">ADD +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <div class="veg-mark"><span class="dot"></span></div>
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="pizza-img" alt="Farmhouse">
+                <div class="pizza-info">
+                    <h3>Farmhouse Special</h3>
+                    <p class="ingredients">Onion, Capsicum, Tomato, Mushroom.</p>
+                    <div class="size-select">
+                        <span class="size-btn">Reg</span>
+                        <span class="size-btn active">Med</span>
+                        <span class="size-btn">Lrg</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">₹349</span>
+                        <button class="add-cart">ADD +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <div class="veg-mark"><span class="dot"></span></div>
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="pizza-img" alt="Paneer">
+                <div class="pizza-info">
+                    <h3>Peppy Paneer</h3>
+                    <p class="ingredients">Spicy Paneer chunks, Crisp Capsicum, Red Paprika.</p>
+                    <div class="size-select">
+                        <span class="size-btn">Reg</span>
+                        <span class="size-btn active">Med</span>
+                        <span class="size-btn">Lrg</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">₹399</span>
+                        <button class="add-cart">ADD +</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cheese-banner">
+        <h2>"Happiness is a Slice of Pizza!"</h2>
+        <p>Try our new Cheese Burst Crust today.</p>
+    </div>
+
+    <section class="menu-section" style="background: #181818;">
+        <div class="section-header">
+            <h2 style="color: var(--accent);">Non-Veg Delights</h2>
+        </div>
+
+        <div class="pizza-grid">
+            <div class="pizza-card non-veg">
+                <div class="veg-mark"><span class="dot"></span></div>
+                <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="pizza-img" alt="Chicken Pizza">
+                <div class="pizza-info">
+                    <h3>Chicken Pepperoni</h3>
+                    <p class="ingredients">American classic pepperoni with extra cheese.</p>
+                    <div class="size-select">
+                        <span class="size-btn">Reg</span>
+                        <span class="size-btn active">Med</span>
+                        <span class="size-btn">Lrg</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">₹449</span>
+                        <button class="add-cart">ADD +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pizza-card non-veg">
+                <div class="veg-mark"><span class="dot"></span></div>
+                <img src="https://images.unsplash.com/photo-1593560708920-63892829518e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="pizza-img" alt="BBQ Chicken">
+                <div class="pizza-info">
+                    <h3>BBQ Chicken</h3>
+                    <p class="ingredients">Pepper Barbecue Chicken, Onion, Cheese.</p>
+                    <div class="size-select">
+                        <span class="size-btn">Reg</span>
+                        <span class="size-btn active">Med</span>
+                        <span class="size-btn">Lrg</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price">₹399</span>
+                        <button class="add-cart">ADD +</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h3>ABHINAV PIZZA STUDIO</h3>
+        <p>Delivering Hot & Fresh in 30 Mins.</p>
+        <br>
+        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        <p><i class="fas fa-map-marker-alt"></i> Shop 5, Green Avenue, City</p>
+    </footer>
+
+</body>
+</html>
