@@ -3,11 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 5</title>
+    <title>Anvi Beauty Parlour | Premium Salon</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- LUXURY THEME VARIABLES --- */
+        :root {
+            --primary: #d4a373;   /* Classic Gold */
+            --secondary: #faedcd; /* Soft Cream */
+            --dark: #2c3e50;      /* Dark Blue/Gray */
+            --text: #4a4a4a;
+            --white: #ffffff;
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { color: var(--dark); font-family: 'Playfair Display', serif; }
+        .script-font { font-family: 'Great Vibes', cursive; color: var(--primary); font-size: 2.5rem; }
+        
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 700; letter-spacing: 2px; color: var(--dark); }
+        .logo span { color: var(--primary); }
+        
+        .btn-main {
+            background: var(--dark);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: 1px solid var(--dark);
+        }
+
+        .btn-main:hover { background: transparent; color: var(--dark); }
+
+        /* --- HERO SECTION (Parallax) --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1596178065248-2b047587849e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-attachment: fixed; /* Parallax Effect */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 4rem; color: white; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; letter-spacing: 2px; }
+
+        /* --- PRICE LIST (MASONRY GRID) --- */
+        .menu-section { padding: 80px 5%; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 10px; }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .price-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--primary);
+        }
+
+        .price-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+
+        .card-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .card-title i { font-size: 2rem; color: var(--primary); margin-bottom: 10px; display: block; }
+        .card-title h3 { font-size: 1.5rem; letter-spacing: 1px; }
+
+        /* MENU ITEM STYLE (Dotted Line) */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .menu-item .name { font-weight: 500; color: var(--dark); background: white; padding-right: 5px; z-index: 1; }
+        .menu-item .dots { flex-grow: 1; border-bottom: 1px dotted #ccc; margin-bottom: 5px; }
+        .menu-item .price { font-weight: 700; color: var(--primary); background: white; padding-left: 5px; z-index: 1; }
+
+        /* --- BOOKING FORM --- */
+        .booking-area {
+            background: var(--dark);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Subtle texture */
+        }
+
+        .booking-area h2 { color: white; margin-bottom: 30px; }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Jost', sans-serif;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover { background: #c59155; }
+
+        /* --- FOOTER --- */
+        footer { background: #1a1a1a; padding: 30px; text-align: center; color: #777; }
+        
+        /* --- WHATSAPP FLOAT --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 2000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 5</h1>
-    <p>This is the page for Shop 5.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <nav>
+        <div class="logo">ANVI <span>BEAUTY</span></div>
+        <a href="#booking" class="btn-main">Book Now</a>
+    </nav>
+
+    <section class="hero">
+        <span class="script-font" data-aos="fade-up">Welcome to</span>
+        <h1 data-aos="fade-up" data-aos-delay="200">ANVI BEAUTY PARLOUR</h1>
+        <p data-aos="fade-up" data-aos-delay="400">Experience the Art of Beauty</p>
+        <a href="#menu" class="btn-main" style="background:white; color:var(--dark); margin-top:20px;" data-aos="fade-up" data-aos-delay="600">Check Price List</a>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="section-header" data-aos="fade-up">
+            <span class="script-font">Our Exclusive</span>
+            <h2>Price List</h2>
+            <div style="width: 80px; height: 3px; background: var(--primary); margin: 0 auto;"></div>
+        </div>
+
+        <div class="grid-container">
+
+            <div class="price-card" data-aos="fade-up">
+                <div class="card-title">
+                    <i class="fas fa-magic"></i>
+                    <h3>Threading</h3>
+                </div>
+                <div class="menu-item"><span class="name">Eye Brows</span><span class="dots"></span><span class="price">₹30</span></div>
+                <div class="menu-item"><span class="name">Upper Lips</span><span class="dots"></span><span class="price">₹20</span></div>
+                <div class="menu-item"><span class="name">Chin / Forehead</span><span class="dots"></span><span class="price">₹20</span></div>
+                <div class="menu-item"><span class="name">Side Locks</span><span class="dots"></span><span class="price">₹40</span></div>
+                <div class="menu-item"><span class="name">Full Face</span><span class="dots"></span><span class="price">₹120</span></div>
+            </div>
+
+            <div class="price-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-title">
+                    <i class="fas fa-feather"></i>
+                    <h3>Waxing</h3>
+                </div>
+                <div class="menu-item"><span class="name">Under Arms</span><span class="dots"></span><span class="price">₹50 / ₹100</span></div>
+                <div class="menu-item"><span class="name">Full Arms</span><span class="dots"></span><span class="price">₹150 / ₹300</span></div>
+                <div class="menu-item"><span class="name">Half Arms</span><span class="dots"></span><span class="price">₹100 / ₹200</span></div>
+                <div class="menu-item"><span class="name">Full Legs</span><span class="dots"></span><span class="price">₹300 / ₹500</span></div>
+                <div class="menu-item"><span class="name">Stomach</span><span class="dots"></span><span class="price">₹150 / ₹200</span></div>
+                <div class="menu-item"><span class="name">Full Body</span><span class="dots"></span><span class="price">₹2000 / ₹2500</span></div>
+            </div>
+
+            <div class="price-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-title">
+                    <i class="fas fa-sun"></i>
+                    <h3>Bleach</h3>
+                </div>
+                <div class="menu-item"><span class="name">Face</span><span class="dots"></span><span class="price">₹100</span></div>
+                <div class="menu-item"><span class="name">Face & Neck</span><span class="dots"></span><span class="price">₹180</span></div>
+                <div class="menu-item"><span class="name">Full Arms</span><span class="dots"></span><span class="price">₹200</span></div>
+                <div class="menu-item"><span class="name">Full Legs</span><span class="dots"></span><span class="price">₹400</span></div>
+                <div class="menu-item"><span class="name">Full Body</span><span class="dots"></span><span class="price">₹1500</span></div>
+            </div>
+
+            <div class="price-card" data-aos="fade-up">
+                <div class="card-title">
+                    <i class="fas fa-hand-sparkles"></i>
+                    <h3>Mani & Pedi</h3>
+                </div>
+                <div class="menu-item"><span class="name">Normal Manicure</span><span class="dots"></span><span class="price">₹200</span></div>
+                <div class="menu-item"><span class="name">Spa Manicure</span><span class="dots"></span><span class="price">₹300</span></div>
+                <div class="menu-item"><span class="name">Polishing Manicure</span><span class="dots"></span><span class="price">₹500</span></div>
+                <hr style="margin: 10px 0; border: 0; border-top: 1px dashed #eee;">
+                <div class="menu-item"><span class="name">Normal Pedicure</span><span class="dots"></span><span class="price">₹300</span></div>
+                <div class="menu-item"><span class="name">Spa Pedicure</span><span class="dots"></span><span class="price">₹450</span></div>
+                <div class="menu-item"><span class="name">Polishing Pedicure</span><span class="dots"></span><span class="price">₹600</span></div>
+            </div>
+
+            <div class="price-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="card-title">
+                    <i class="fas fa-cut"></i>
+                    <h3>Hair Cut</h3>
+                </div>
+                <div class="menu-item"><span class="name">Boys Cut</span><span class="dots"></span><span class="price">₹150</span></div>
+                <div class="menu-item"><span class="name">Straight Cut</span><span class="dots"></span><span class="price">₹150</span></div>
+                <div class="menu-item"><span class="name">U Cut / V Cut</span><span class="dots"></span><span class="price">₹200 / ₹250</span></div>
+                <div class="menu-item"><span class="name">Deep U Cut</span><span class="dots"></span><span class="price">₹250</span></div>
+                <div class="menu-item"><span class="name">Change Styling</span><span class="dots"></span><span class="price">₹500</span></div>
+                <div class="menu-item"><span class="name">Blow Dry</span><span class="dots"></span><span class="price">₹400</span></div>
+            </div>
+
+            <div class="price-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-title">
+                    <i class="fas fa-wind"></i>
+                    <h3>Hair Treatments</h3>
+                </div>
+                <div class="menu-item"><span class="name">Hair Spa</span><span class="dots"></span><span class="price">₹700 - ₹1500</span></div>
+                <div class="menu-item"><span class="name">Hair Pack</span><span class="dots"></span><span class="price">₹700 - ₹1000</span></div>
+                <div class="menu-item"><span class="name">Root Touch Up</span><span class="dots"></span><span class="price">₹800</span></div>
+                <div class="menu-item"><span class="name">Ironing</span><span class="dots"></span><span class="price">₹800</span></div>
+                <div class="menu-item"><span class="name">Straightening</span><span class="dots"></span><span class="price">₹900+</span></div>
+                <div class="menu-item"><span class="name">Global Color</span><span class="dots"></span><span class="price">₹2500</span></div>
+            </div>
+
+             <div class="price-card" data-aos="fade-up">
+                <div class="card-title">
+                    <i class="fas fa-user-crown"></i>
+                    <h3>Makeup Studio</h3>
+                </div>
+                <div class="menu-item"><span class="name">Saree Draping</span><span class="dots"></span><span class="price">₹300</span></div>
+                <div class="menu-item"><span class="name">Hair Do</span><span class="dots"></span><span class="price">₹900</span></div>
+                <div class="menu-item"><span class="name">Light Makeup</span><span class="dots"></span><span class="price">₹1500</span></div>
+                <div class="menu-item"><span class="name">Party Makeup</span><span class="dots"></span><span class="price">₹1800</span></div>
+                <div class="menu-item"><span class="name">Bridal Makeup</span><span class="dots"></span><span class="price">₹3000</span></div>
+                <div class="menu-item"><span class="name">Gun Shot</span><span class="dots"></span><span class="price">₹400</span></div>
+            </div>
+
+            <div class="price-card" style="grid-column: 1 / -1;" data-aos="fade-up">
+                <div class="card-title">
+                    <i class="fas fa-spa"></i>
+                    <h3>Premium Facials</h3>
+                    <p style="font-size: 0.9rem; color: #777;">Duration 40-60 Minutes</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div>
+                        <div class="menu-item"><span class="name">Herbal / Fruit</span><span class="dots"></span><span class="price">₹900</span></div>
+                        <div class="menu-item"><span class="name">VLCC / Shahnaz</span><span class="dots"></span><span class="price">₹1000 / ₹1100</span></div>
+                        <div class="menu-item"><span class="name">Aloe Vera / Banana</span><span class="dots"></span><span class="price">₹800 - ₹900</span></div>
+                        <div class="menu-item"><span class="name">Insta Glow</span><span class="dots"></span><span class="price">₹1000</span></div>
+                        <div class="menu-item"><span class="name">Anti Ageing</span><span class="dots"></span><span class="price">₹1100</span></div>
+                        <div class="menu-item"><span class="name">Oxy Glow</span><span class="dots"></span><span class="price">₹900</span></div>
+                    </div>
+                    <div>
+                        <div class="menu-item"><span class="name">Wine / Pearl</span><span class="dots"></span><span class="price">₹1000 / ₹1100</span></div>
+                        <div class="menu-item"><span class="name">Gold Facial</span><span class="dots"></span><span class="price">₹1200 - ₹2000</span></div>
+                        <div class="menu-item"><span class="name">Diamond</span><span class="dots"></span><span class="price">₹1300 - ₹2500</span></div>
+                        <div class="menu-item"><span class="name">Platinum</span><span class="dots"></span><span class="price">₹1100</span></div>
+                        <div class="menu-item"><span class="name">Whitening / D-Tan</span><span class="dots"></span><span class="price">₹1000</span></div>
+                        <div class="menu-item"><span class="name">Silver</span><span class="dots"></span><span class="price">₹1100</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="booking" class="booking-area">
+        <div class="section-header">
+            <h2 style="color:white;">Book Your Appointment</h2>
+            <p style="color:#ddd;">Fill the form and we will confirm via WhatsApp</p>
+        </div>
+
+        <div class="booking-form" data-aos="zoom-in">
+            <form onsubmit="sendWhatsapp(event)">
+                <div class="form-group">
+                    <input type="text" id="b-name" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="b-phone" class="form-control" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select id="b-service" class="form-control">
+                        <option>Select Service</option>
+                        <option>Facial</option>
+                        <option>Hair Cut / Style</option>
+                        <option>Makeup</option>
+                        <option>Waxing/Threading</option>
+                        <option>Full Body Package</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="b-date" class="form-control">
+                </div>
+                <button type="submit" class="btn-submit">CONFIRM BOOKING <i class="fab fa-whatsapp"></i></button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p class="logo" style="font-size: 1.2rem;">ANVI <span>BEAUTY PARLOUR</span></p>
+        <p>Contact: +91 7253076678 | Meerut, UP</p>
+        <p>&copy; 2025 Anvi Beauty. All Rights Reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/917253076678" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init Animation Library
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // WhatsApp Logic
+        function sendWhatsapp(e) {
+            e.preventDefault();
+            var name = document.getElementById('b-name').value;
+            var phone = document.getElementById('b-phone').value;
+            var service = document.getElementById('b-service').value;
+            var date = document.getElementById('b-date').value;
+
+            var url = "https://wa.me/917253076678?text=" 
+                + "*New Booking Request* %0a"
+                + "Name: " + name + "%0a"
+                + "Phone: " + phone + "%0a"
+                + "Service: " + service + "%0a"
+                + "Preferred Date: " + date;
+
+            window.open(url, '_blank').focus();
+        }
+    </script>
 </body>
 </html>
+
