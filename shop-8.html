@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iron Muscle Gym - With Booking</title>
+    <title>Iron Muscle Gym - WhatsApp Booking</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- PURANA CSS (Same as before) --- */
+        /* --- CSS STYLING (Same as before) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
         body { background-color: #111; color: #fff; line-height: 1.6; }
         :root { --primary-color: #ff3300; --dark-bg: #1a1a1a; --light-text: #f4f4f4; }
@@ -44,66 +44,17 @@
         .highlight { border: 2px solid var(--primary-color); transform: scale(1.05); position: relative; background: #2a2a2a; }
         footer { padding: 20px; text-align: center; background: #000; color: #888; margin-top: 20px; }
 
-        /* --- NAYA CSS BOOKING MODAL KE LIYE --- */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #222;
-            margin: auto;
-            padding: 30px;
-            border: 2px solid var(--primary-color);
-            width: 90%;
-            max-width: 500px;
-            border-radius: 10px;
-            position: relative;
-            text-align: left;
-            animation: slideIn 0.4s;
-        }
-
-        @keyframes slideIn {
-            from {transform: translateY(-50px); opacity: 0;}
-            to {transform: translateY(0); opacity: 1;}
-        }
-
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
+        /* MODAL CSS */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
+        .modal-content { background-color: #222; margin: auto; padding: 30px; border: 2px solid var(--primary-color); width: 90%; max-width: 500px; border-radius: 10px; position: relative; text-align: left; animation: slideIn 0.4s; }
+        @keyframes slideIn { from {transform: translateY(-50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
         .close-btn:hover { color: var(--primary-color); }
-
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; color: #ccc; }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            background: #333;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+        .form-group input, .form-group select { width: 100%; padding: 10px; background: #333; border: 1px solid #444; color: white; border-radius: 5px; font-size: 16px; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); }
 
-        /* Mobile Fixes */
         @media (max-width: 768px) {
             .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; right: 0; width: 100%; background: #000; text-align: center; }
             .nav-links.active { display: flex; }
@@ -203,12 +154,11 @@
                 <i class="fas fa-clock"></i>
                 <h3>Opening Time</h3>
                 <p><strong>Mon - Sat:</strong> 06:00 AM - 10:00 PM</p>
-                <p><strong>Sunday:</strong> Closed</p>
             </div>
             <div class="info-box">
                 <i class="fas fa-phone"></i>
                 <h3>Contact</h3>
-                <p>+91 98765 43210</p>
+                <p>+91 72530 76678</p>
             </div>
         </div>
     </section>
@@ -220,15 +170,15 @@
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeBooking()">&times;</span>
-            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Book Your Session</h2>
-            <form id="bookingForm" onsubmit="submitBooking(event)">
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Book on WhatsApp</h2>
+            <form id="bookingForm" onsubmit="submitToWhatsapp(event)">
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" id="name" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="tel" id="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                    <input type="tel" id="phone" placeholder="Your mobile number" required>
                 </div>
                 <div class="form-group">
                     <label>Booking Type</label>
@@ -243,51 +193,59 @@
                     <label>Preferred Date</label>
                     <input type="date" id="date" required>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">CONFIRM BOOKING</button>
+                <button type="submit" class="btn" style="width: 100%;">
+                    <i class="fab fa-whatsapp"></i> SEND TO WHATSAPP
+                </button>
             </form>
         </div>
     </div>
 
     <script>
-        // --- NEW JAVASCRIPT FOR BOOKING ---
+        // --- WHATSAPP LOGIC ---
 
-        // 1. Modal Open Karne ka Function
         function openBooking(planName) {
             const modal = document.getElementById("bookingModal");
             const selectBox = document.getElementById("planType");
-            
-            // Modal show karein (flex display use kiya taaki center ho)
             modal.style.display = "flex";
-
-            // Agar user ne specific plan click kiya hai, to dropdown me wahi select ho jaye
             if (planName) {
                 selectBox.value = planName;
             }
         }
 
-        // 2. Modal Close Karne ka Function
         function closeBooking() {
             document.getElementById("bookingModal").style.display = "none";
         }
 
-        // 3. Form Submit hone par kya hoga
-        function submitBooking(event) {
-            event.preventDefault(); // Page reload rokne ke liye
+        function submitToWhatsapp(event) {
+            event.preventDefault(); // Page reload rokein
             
-            // Values lena
+            // User se data lein
             const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
             const plan = document.getElementById("planType").value;
             const date = document.getElementById("date").value;
 
-            // Simple Alert (Yaha aap backend API laga sakte ho)
-            alert(`Thank You, ${name}!\nYour booking for "${plan}" on ${date} is confirmed.\nWe will call you shortly.`);
+            // WhatsApp Message Format
+            const gymNumber = "917253076678"; // Aapka number
             
-            // Close modal and reset form
-            closeBooking();
-            document.getElementById("bookingForm").reset();
+            // Message Text (Encoded)
+            const message = `*Hello Iron Muscle Gym!*%0A%0A` +
+                            `I want to book a session.%0A` +
+                            `*Name:* ${name}%0A` +
+                            `*Phone:* ${phone}%0A` +
+                            `*Plan:* ${plan}%0A` +
+                            `*Date:* ${date}`;
+
+            // WhatsApp Link Open karein
+            const whatsappUrl = `https://wa.me/${gymNumber}?text=${message}`;
+            
+            // New Tab me open karein
+            window.open(whatsappUrl, '_blank').focus();
+            
+            closeBooking(); // Modal band karein
         }
 
-        // Close modal agar bahar click kiya jaye
+        // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById("bookingModal");
             if (event.target == modal) {
@@ -295,7 +253,7 @@
             }
         }
 
-        // --- OLD MENU LOGIC ---
+        // Mobile Menu
         function toggleMenu() {
             const navLinks = document.getElementById("navLinks");
             navLinks.classList.toggle("active");
@@ -308,4 +266,3 @@
     </script>
 </body>
 </html>
-
