@@ -1,13 +1,493 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 18</title>
+    <title>THE LEGACY | Luxury Grooming Lounge</title>
+    <meta name="description" content="The Legacy - Where grooming meets luxury. Premium haircuts, beard styling and facial treatments for the modern gentleman.">
+    
+    <style>
+        /* --- 1. LUXURY THEME VARIABLES --- */
+        :root {
+            --gold: #C5A059;
+            --gold-light: #eacda3;
+            --black: #050505;
+            --panel: #0f0f0f;
+            --white: #ffffff;
+            --gray: #8c8c8c;
+            --font-serif: 'Times New Roman', Times, serif; /* Classic Luxury */
+            --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --border-gold: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        /* --- 2. RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.4s; }
+        ul { list-style: none; }
+
+        /* --- 3. TYPOGRAPHY & UTILS --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .text-gold { color: var(--gold); }
+        .text-center { text-align: center; }
+        .section-padding { padding: 100px 0; }
+
+        .divider {
+            height: 1px;
+            width: 80px;
+            background: var(--gold);
+            margin: 20px auto;
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 15px 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: transparent;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-luxury:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
+        }
+
+        /* --- 4. NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--gold); }
+
+        .nav-links a {
+            margin-left: 30px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 40px;
+        }
+
+        /* --- 6. SERVICES (Minimalist Grid) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--panel);
+            padding: 40px 30px;
+            text-align: center;
+            border: var(--border-gold);
+            transition: 0.5s;
+        }
+
+        .service-card:hover {
+            background: #151515;
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .icon-gold {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* --- 7. PRICE LIST (Elegant List) --- */
+        .price-section {
+            background: var(--panel);
+        }
+
+        .price-container {
+            max-width: 800px;
+            margin: 60px auto 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .price-row:last-child { border-bottom: none; }
+
+        .price-name {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .price-val {
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        /* --- 8. TIMING --- */
+        .timing {
+            text-align: center;
+            border-top: var(--border-gold);
+            border-bottom: var(--border-gold);
+            padding: 60px 0;
+            background: var(--black);
+        }
+
+        .timing h2 { margin-bottom: 20px; }
+        
+        .time-block {
+            display: inline-block;
+            margin: 0 20px;
+        }
+        
+        .time-block span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .time-block p {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        /* --- 9. BOOKING (Concierge Style) --- */
+        .booking-section {
+            background: url('https://images.unsplash.com/photo-1593702295094-aea8c5c13586?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover fixed;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(5,5,5,0.9);
+            position: absolute;
+            inset: 0;
+        }
+
+        .form-box {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .luxury-form { margin-top: 40px; }
+
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 15px 0;
+            color: var(--white);
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--gold);
+        }
+
+        .form-input::placeholder {
+            color: #555;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        select.form-input { color: var(--gold); }
+        select.form-input option { background: #000; color: #fff; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid #111;
+        }
+        
+        .copy { color: var(--gray); font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .container { padding: 0 20px; }
+            .time-block { margin: 10px 0; display: block; }
+        }
+
+        /* --- ANIMATION --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease;
+        }
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 18</h1>
-    <p>This is the page for Shop 18.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <nav>
+        <div class="logo">THE <span>LEGACY</span></div>
+        <div class="nav-links">
+            <a href="#services">Experience</a>
+            <a href="#tariff">Tariff</a>
+            <a href="#concierge">Reservation</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="fade-up">Est. 2025</p>
+            <h1 class="fade-up">The Gentleman's <br> <span class="text-gold">Sanctuary</span></h1>
+            <a href="#concierge" class="btn-luxury fade-up">Secure Appointment</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span style="color:var(--gold); letter-spacing:2px; font-size:0.8rem; text-transform:uppercase;">Grooming Services</span>
+                <h2 style="font-size: 2.5rem; margin-top:10px;">Refined Excellence</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-up">
+                    <span class="icon-gold">✂</span>
+                    <h3>Signature Cut</h3>
+                    <p>Tailored haircut to suit your profile.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <span class="icon-gold">🧔</span>
+                    <h3>Beard Sculpting</h3>
+                    <p>Precise trimming and hot towel styling.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <span class="icon-gold">💆‍♂️</span>
+                    <h3>Head Therapy</h3>
+                    <p>Relaxing massage to alleviate stress.</p>
+                </div>
+                <div class="service-card fade-up">
+                    <span class="icon-gold">✨</span>
+                    <h3>Face Radiance</h3>
+                    <p>Premium cleanup for revitalized skin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tariff" class="section-padding price-section">
+        <div class="container">
+            <div class="text-center fade-up">
+                <h2>The Tariff</h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="price-container fade-up">
+                <div class="price-row">
+                    <span class="price-name">Classic Hair Cut</span>
+                    <span class="price-val">₹100</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-name">Beard Grooming</span>
+                    <span class="price-val">₹80</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-name">The Legacy Combo (Cut + Beard)</span>
+                    <span class="price-val">₹150</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-name">Deep Face Clean Up</span>
+                    <span class="price-val">₹199</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timing fade-up">
+        <div class="container">
+            <h2>Opening Hours</h2>
+            <div class="time-block">
+                <span>Morning Session</span>
+                <p>09:00 AM – 01:00 PM</p>
+            </div>
+            <div class="time-block">
+                <span>Evening Session</span>
+                <p>04:00 PM – 09:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="concierge" class="section-padding booking-section">
+        <div class="overlay"></div>
+        <div class="container form-box">
+            <h2 class="fade-up" style="font-size: 2.5rem;">Reservation</h2>
+            <p class="fade-up" style="color:var(--gold); margin-top:10px; font-style:italic;">Exclusive WhatsApp Concierge</p>
+
+            <form id="legacyForm" class="luxury-form fade-up">
+                <input type="text" id="lName" class="form-input" placeholder="Guest Name" required>
+                <input type="tel" id="lMobile" class="form-input" placeholder="Contact Number" pattern="[0-9]{10}" required>
+                
+                <select id="lService" class="form-input">
+                    <option value="Hair Cut">Hair Cut - ₹100</option>
+                    <option value="Beard Trim">Beard Trim - ₹80</option>
+                    <option value="Combo">Legacy Combo - ₹150</option>
+                    <option value="Face Clean Up">Face Clean Up - ₹199</option>
+                </select>
+
+                <button type="submit" class="btn-luxury" style="width: 100%; margin-top: 20px;">
+                    Request Booking
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo" style="margin-bottom: 20px;">THE <span>LEGACY</span></div>
+        <p class="copy">&copy; 2025 The Legacy Grooming Lounge. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 1. Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // 2. Form Logic
+        document.getElementById('legacyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('lName').value;
+            const mobile = document.getElementById('lMobile').value;
+            const service = document.getElementById('lService').value;
+            const number = "7253076678";
+
+            if(mobile.length !== 10) {
+                alert("Please enter a valid 10-digit number.");
+                return;
+            }
+
+            const message = `Hello Sir, mujhe boys salon me booking karni hai.\nName: ${name}\nMobile: ${mobile}\nService: ${service}`;
+            const url = `https://wa.me/91${number}?text=${encodeURIComponent(message)}`;
+
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>
