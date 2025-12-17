@@ -3,11 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 14</title>
+    <title>The Grooming Hub | Professional Boys Salon</title>
+    <meta name="description" content="Best Boys Salon in town. Haircut, Beard styling, and grooming services at affordable prices.">
+    
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            --primary-color: #0056b3; /* Classic Blue */
+            --secondary-color: #333333; /* Dark Grey */
+            --accent-color: #f8f9fa; /* Light Background */
+            --text-color: #444444;
+            --white: #ffffff;
+            --transition: 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        
+        /* --- 2. LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding { padding: 60px 0; }
+
+        .text-center { text-align: center; }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: #004494;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: #777;
+            margin-bottom: 50px;
+            font-size: 1rem;
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--secondary-color); }
+
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--secondary-color); }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1593702295094-aea8c5c13586?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px; /* Offset for fixed header */
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* --- 5. SERVICES SECTION --- */
+        .services { background-color: var(--accent-color); }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .service-card p { font-size: 0.9rem; color: #666; }
+
+        /* --- 6. PRICING SECTION --- */
+        .pricing-table {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .pricing-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .pricing-item:last-child { border-bottom: none; }
+        .pricing-item:hover { background-color: #f1f8ff; }
+
+        .pricing-name { font-weight: 600; font-size: 1.1rem; color: var(--secondary-color); }
+        .pricing-cost { font-weight: 700; color: var(--primary-color); font-size: 1.2rem; }
+
+        /* --- 7. TIMING SECTION --- */
+        .timing {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .timing-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .time-slot h3 { color: #aaa; margin-bottom: 10px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .time-slot p { font-size: 1.5rem; font-weight: 700; }
+
+        /* --- 8. BOOKING SECTION --- */
+        .booking { background-color: var(--accent-color); }
+
+        .booking-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
+        }
+
+        .btn-whatsapp {
+            width: 100%;
+            background-color: #25D366;
+            color: white;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-whatsapp:hover { background-color: #1ebc59; }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .container { padding: 0 15px; }
+            .pricing-item { padding: 15px; }
+        }
+        
+        /* --- ANIMATION --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 14</h1>
-    <p>This is the page for Shop 14.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">The Grooming <span>Hub</span></div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#prices">Prices</a>
+                    <a href="#booking">Book Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container fade-in">
+            <h1>Look Sharp, Feel Confident</h1>
+            <p>Professional grooming services for the modern man.</p>
+            <a href="#booking" class="btn">Book Appointment</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">We offer everything you need to look your best.</p>
+            </div>
+            
+            <div class="service-grid">
+                <div class="service-card fade-in">
+                    <div class="icon">✂️</div>
+                    <h3>Hair Cut</h3>
+                    <p>Trendy and classic cuts suited for your face shape.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="icon">🧔</div>
+                    <h3>Beard Trim & Styling</h3>
+                    <p>Expert trimming and shaping for a sharp beard.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="icon">💆‍♂️</div>
+                    <h3>Head Massage</h3>
+                    <p>Relaxing oil massage to relieve stress.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="icon">✨</div>
+                    <h3>Face Clean Up</h3>
+                    <p>Refreshing cleanup for glowing skin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prices" class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Price List</h2>
+                <p class="section-subtitle">Affordable rates, premium service.</p>
+            </div>
+
+            <div class="pricing-table fade-in">
+                <div class="pricing-item">
+                    <span class="pricing-name">Hair Cut</span>
+                    <span class="pricing-cost">₹100</span>
+                </div>
+                <div class="pricing-item">
+                    <span class="pricing-name">Beard Trim</span>
+                    <span class="pricing-cost">₹80</span>
+                </div>
+                <div class="pricing-item">
+                    <span class="pricing-name">Hair Cut + Beard (Combo)</span>
+                    <span class="pricing-cost">₹150</span>
+                </div>
+                <div class="pricing-item">
+                    <span class="pricing-name">Face Clean Up</span>
+                    <span class="pricing-cost">₹199</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding timing">
+        <div class="container">
+            <h2 class="section-title" style="color:white;">Opening Hours</h2>
+            <div class="timing-box fade-in" style="margin-top: 30px;">
+                <div class="time-slot">
+                    <h3>Morning</h3>
+                    <p>9:00 AM – 1:00 PM</p>
+                </div>
+                <div class="time-slot">
+                    <h3>Evening</h3>
+                    <p>4:00 PM – 9:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="section-padding booking">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Book Your Slot</h2>
+                <p class="section-subtitle">Avoid the queue, book online via WhatsApp.</p>
+            </div>
+
+            <div class="booking-form fade-in">
+                <form id="salonForm">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" id="mobile" class="form-control" placeholder="10-digit Mobile Number" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Service</label>
+                        <select id="service" class="form-control">
+                            <option value="Hair Cut">Hair Cut (₹100)</option>
+                            <option value="Beard Trim">Beard Trim (₹80)</option>
+                            <option value="Hair Cut + Beard">Hair Cut + Beard (₹150)</option>
+                            <option value="Face Clean Up">Face Clean Up (₹199)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-whatsapp">
+                        <span>💬</span> WhatsApp par Booking Kare
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 The Grooming Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 1. Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 2. Booking Logic
+        document.getElementById('salonForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get Values
+            const name = document.getElementById('name').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const service = document.getElementById('service').value;
+            const fixedNumber = "7253076678";
+
+            // Validation
+            if (mobile.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            // Create Message
+            const message = `Hello Sir, mujhe boys salon me booking karni hai.\nName: ${name}\nMobile: ${mobile}\nService: ${service}`;
+
+            // Redirect to WhatsApp
+            const url = `https://wa.me/91${fixedNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>
+
