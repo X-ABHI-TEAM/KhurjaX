@@ -3,11 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 19</title>
+    <title>Style Street | Trendy Fashion Store</title>
+    <meta name="description" content="Style Street - Best Garments Shop. Latest collection of Men's, Women's, and Kids' wear. Huge discounts available.">
+    
+    <style>
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --primary: #ff5e57; /* Vibrant Coral/Red for Sales */
+            --secondary: #2f3542; /* Dark Navy/Grey */
+            --light: #f1f2f6;
+            --white: #ffffff;
+            --accent: #ffa502; /* Golden/Orange for offers */
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--secondary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- 2. UTILITY CLASSES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding { padding: 60px 0; }
+        .text-center { text-align: center; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 10px rgba(255, 94, 87, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #ff3f34;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .section-title span { color: var(--primary); }
+
+        /* --- 3. HEADER --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* --- 5. CATEGORIES --- */
+        .categories { background: var(--light); }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .cat-card {
+            background: var(--white);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .cat-icon { font-size: 2rem; margin-bottom: 10px; }
+        .cat-title { font-weight: 700; font-size: 1.1rem; }
+
+        /* --- 6. OFFERS (DESIGN 1 SPECIFIC) --- */
+        .offer-section {
+            background: #fff;
+            padding: 80px 0;
+        }
+
+        .offer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .offer-card {
+            background: linear-gradient(135deg, #2f3542, #1e272e);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .offer-card.highlight {
+            background: linear-gradient(135deg, var(--primary), #ff3f34);
+            border: 2px solid #fff;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 94, 87, 0.3);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .offer-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 15px 0;
+        }
+
+        .offer-sub {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* --- 7. TIMING --- */
+        .timing {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .timing p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .timing span {
+            color: var(--primary);
+            font-weight: 800;
+            margin: 0 10px;
+        }
+
+        /* --- 8. ENQUIRY FORM --- */
+        .enquiry {
+            background: url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover fixed;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(255, 255, 255, 0.95);
+            position: absolute;
+            inset: 0;
+        }
+
+        .form-box {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background-color: #25D366;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1ebc57;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #222;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMATION --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .logo { font-size: 1.5rem; }
+            .offer-title { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 19</h1>
-    <p>This is the page for Shop 19.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">STYLE <span>STREET</span></div>
+                <div class="nav-links">
+                    <a href="#categories">Collection</a>
+                    <a href="#offers">Offers</a>
+                    <a href="#contact">Order Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <p>New Season Arrivals</p>
+            <h1>Upgrade Your <br> Wardrobe Today</h1>
+            <a href="#offers" class="btn btn-primary">Check Offers</a>
+        </div>
+    </section>
+
+    <section id="categories" class="section-padding categories">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Shop By <span>Category</span></h2>
+                <p>Explore our wide range of premium clothing</p>
+            </div>
+
+            <div class="cat-grid">
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">👔</div>
+                    <div class="cat-title">Men's Wear</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">👗</div>
+                    <div class="cat-title">Women's Wear</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">🧸</div>
+                    <div class="cat-title">Kids Wear</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">✨</div>
+                    <div class="cat-title">Ethnic Wear</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">👕</div>
+                    <div class="cat-title">Casual Wear</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="offers" class="section-padding offer-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2 class="section-title">Exclusive <span>Deals</span></h2>
+                <p>Limited Time Offers. Grab them before they are gone!</p>
+            </div>
+
+            <div class="offer-container">
+                <div class="offer-card fade-in">
+                    <div class="badge">Trending</div>
+                    <div class="offer-sub">On Premium Men's Wear</div>
+                    <div class="offer-title">FLAT 40% OFF</div>
+                    <p>On Jeans, Shirts & Trousers</p>
+                    <br>
+                    <a href="#contact" class="btn btn-primary" onclick="selectCategory('Men\'s Wear')">Shop Now</a>
+                </div>
+
+                <div class="offer-card highlight fade-in">
+                    <div class="badge">Best Seller</div>
+                    <div class="offer-sub">Super Saver Deal</div>
+                    <div class="offer-title">BUY 1 GET 1 FREE</div>
+                    <p>On all branded T-Shirts</p>
+                    <br>
+                    <a href="#contact" class="btn" style="background:white; color:var(--primary)" onclick="selectCategory('Casual Wear')">Grab Deal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timing">
+        <div class="container">
+            <p>🕒 Shop Open: <span>10:00 AM</span> to <span>09:30 PM</span> (Daily)</p>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding enquiry">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="form-box fade-in">
+                <h2 class="section-title">Place <span>Order</span></h2>
+                <p style="margin-bottom: 30px; color: #666;">Fill details to enquire or order via WhatsApp</p>
+                
+                <form id="shopForm">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" id="cName" class="form-control" placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Mobile Number</label>
+                        <input type="tel" id="cMobile" class="form-control" placeholder="10-digit number" pattern="[0-9]{10}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Interested In</label>
+                        <select id="cCategory" class="form-control">
+                            <option value="Men's Wear">Men's Wear (40% OFF)</option>
+                            <option value="T-Shirts">T-Shirts (Buy 1 Get 1)</option>
+                            <option value="Women's Wear">Women's Wear</option>
+                            <option value="Kids Wear">Kids Wear</option>
+                            <option value="Ethnic Wear">Ethnic Wear</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="whatsapp-btn">
+                        <span>💬</span> WhatsApp par Order Kare
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Style Street Garments. Best Quality. Best Price.</p>
+    </footer>
+
+    <script>
+        // 1. Scroll Animations (Fade In)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 2. Pre-select Category from Offer Buttons
+        function selectCategory(catValue) {
+            const select = document.getElementById('cCategory');
+            // Try to find exact match or default
+            for(let i=0; i<select.options.length; i++) {
+                if(select.options[i].value.includes(catValue) || select.options[i].text.includes(catValue)) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // 3. Form Submission to WhatsApp
+        document.getElementById('shopForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('cName').value.trim();
+            const mobile = document.getElementById('cMobile').value.trim();
+            const category = document.getElementById('cCategory').value;
+            const fixedNumber = "7253076678";
+
+            // Simple Validation
+            if(mobile.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            // Construct Message
+            const message = `Hello Sir, mujhe kapdo ki dukan se order / enquiry karni hai.\nName: ${name}\nMobile: ${mobile}\nCategory: ${category}`;
+
+            // Create WhatsApp Link
+            const whatsappUrl = `https://wa.me/91${fixedNumber}?text=${encodeURIComponent(message)}`;
+
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
 </body>
 </html>
+
