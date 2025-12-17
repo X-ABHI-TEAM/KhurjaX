@@ -3,11 +3,536 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 20</title>
+    <title>UTSAV FASHION | Mega Festive Sale</title>
+    <meta name="description" content="Utsav Fashion - Mega Festive Sale is Live! Up to 60% OFF on Men, Women, and Kids wear. Extra 10% discount on prepaid.">
+    
+    <style>
+        /* --- 1. FESTIVE THEME VARIABLES --- */
+        :root {
+            --festive-red: #c0392b; /* Traditional Red */
+            --festive-gold: #f1c40f; /* Celebration Gold */
+            --deep-maroon: #781010;
+            --cream: #fff9e6;
+            --text-dark: #2c3e50;
+            --white: #ffffff;
+            --shadow: 0 10px 20px rgba(0,0,0,0.15);
+            --font-heading: 'Georgia', serif; /* Elegant Serif */
+            --font-body: 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- 2. DECORATIVE ELEMENTS --- */
+        .decorative-border {
+            height: 10px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--festive-red),
+                var(--festive-red) 10px,
+                var(--festive-gold) 10px,
+                var(--festive-gold) 20px
+            );
+        }
+
+        /* --- 3. UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center { text-align: center; }
+        .section-padding { padding: 70px 0; }
+        a { text-decoration: none; transition: 0.3s; }
+
+        .btn-gold {
+            background: linear-gradient(to bottom, #f1c40f, #f39c12);
+            color: #4a0404;
+            padding: 15px 40px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(to bottom, #f39c12, #d35400);
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h2.section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--deep-maroon);
+            margin-bottom: 10px;
+        }
+
+        h2.section-title span { color: #d35400; }
+
+        /* --- 4. HEADER --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-ticker {
+            background: var(--deep-maroon);
+            color: var(--festive-gold);
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 5px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--deep-maroon);
+            font-weight: bold;
+        }
+        
+        .logo span { color: var(--festive-red); }
+
+        .nav-links a {
+            color: var(--text-dark);
+            margin-left: 20px;
+            font-weight: 600;
+        }
+        
+        .nav-links a:hover { color: var(--festive-red); }
+
+        /* --- 5. HERO (FESTIVAL VIBE) --- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            background: radial-gradient(circle, rgba(120,16,16,0.8), rgba(60,6,6,0.9)), url('https://images.unsplash.com/photo-1549439602-43ebca2327af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            border-bottom: 5px solid var(--festive-gold);
+        }
+
+        /* Sparkle effect */
+        .hero::before {
+            content: '✨';
+            position: absolute;
+            top: 20%; left: 10%; font-size: 3rem; animation: float 3s infinite ease-in-out;
+        }
+        .hero::after {
+            content: '🪔';
+            position: absolute;
+            bottom: 20%; right: 10%; font-size: 3rem; animation: float 4s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px var(--festive-gold);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: var(--festive-gold);
+            font-weight: bold;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 5px;
+        }
+
+        /* --- 6. CATEGORIES (Ornate) --- */
+        .categories {
+            background-image: radial-gradient(#fff9e6 20%, transparent 20%),
+            radial-gradient(#fff9e6 20%, transparent 20%);
+            background-color: #fff0d6;
+            background-position: 0 0, 50px 50px;
+            background-size: 100px 100px;
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .cat-card {
+            background: var(--white);
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--festive-gold);
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            border-color: var(--festive-red);
+        }
+
+        .cat-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .cat-title { font-size: 1.2rem; font-weight: bold; color: var(--deep-maroon); font-family: var(--font-heading); }
+
+        /* --- 7. MEGA SALE OFFERS (DESIGN 3 SPECIFIC) --- */
+        .offers-section {
+            background: linear-gradient(135deg, #961e1e, #680d0d);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Confetti decoration CSS */
+        .confetti {
+            position: absolute;
+            width: 10px; height: 10px;
+            background: var(--festive-gold);
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall { 0% { top: -10%; transform: rotate(0deg); } 100% { top: 100%; transform: rotate(360deg); } }
+
+        .offer-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed var(--festive-gold);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .big-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--festive-gold);
+            line-height: 1;
+            margin: 20px 0;
+            text-shadow: 3px 3px 0px #000;
+        }
+
+        .sub-offer {
+            background: var(--white);
+            color: var(--deep-maroon);
+            display: inline-block;
+            padding: 10px 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- 8. TIMING --- */
+        .timing {
+            background: var(--white);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+        }
+        .timing p { font-size: 1.2rem; font-weight: bold; color: var(--deep-maroon); }
+
+        /* --- 9. ORDER FORM (Royal Look) --- */
+        .enquiry-section {
+            background-color: var(--cream);
+        }
+
+        .form-frame {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 10px;
+            border: 2px solid var(--festive-gold);
+            border-radius: 10px;
+        }
+
+        .form-inner {
+            border: 2px solid var(--festive-red);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--deep-maroon);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: #fffdf5;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--festive-red);
+            box-shadow: 0 0 5px rgba(192, 57, 43, 0.2);
+        }
+
+        .wa-btn {
+            width: 100%;
+            background-color: #25D366;
+            color: white;
+            padding: 15px;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .wa-btn:hover { background-color: #128C7E; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--deep-maroon);
+            color: var(--festive-gold);
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .big-text { font-size: 3.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 20</h1>
-    <p>This is the page for Shop 20.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <div class="decorative-border"></div>
+
+    <header>
+        <div class="top-ticker">🎉 MEGA FESTIVAL SALE IS LIVE NOW! 🎉</div>
+        <nav>
+            <div class="logo">UTSAV <span>FASHION</span></div>
+            <div class="nav-links">
+                <a href="#collection">Collection</a>
+                <a href="#sale">Mega Sale</a>
+                <a href="#order">Order</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in">MAHA UTSAV <br> SALE</h1>
+            <p class="fade-in">Celebrate in Style • Save Big</p>
+            <br>
+            <a href="#sale" class="btn-gold fade-in">VIEW OFFERS</a>
+        </div>
+    </section>
+
+    <section id="collection" class="section-padding categories">
+        <div class="container">
+            <h2 class="section-title text-center">Festival <span>Collection</span></h2>
+            <p class="text-center">Handpicked styles for the festive season</p>
+            
+            <div class="cat-grid">
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">👘</div>
+                    <div class="cat-title">Ethnic Wear</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">🤵</div>
+                    <div class="cat-title">Men's Kurta</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">💃</div>
+                    <div class="cat-title">Women's Sarees</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">🎈</div>
+                    <div class="cat-title">Kids Party Wear</div>
+                </div>
+                <div class="cat-card fade-in">
+                    <div class="cat-icon">👖</div>
+                    <div class="cat-title">Smart Casuals</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sale" class="offers-section">
+        <div class="confetti" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="confetti" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="confetti" style="left: 70%; animation-delay: 1s;"></div>
+        <div class="confetti" style="left: 90%; animation-delay: 3s;"></div>
+
+        <div class="container">
+            <div class="offer-box fade-in">
+                <h3 style="font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Biggest Sale of the Year</h3>
+                <div class="big-text">UP TO 60% OFF</div>
+                <p style="font-size: 1.2rem;">On Entire Store Collection</p>
+                
+                <div class="sub-offer">
+                    PLUS: EXTRA 10% OFF ON PREPAID ORDERS
+                </div>
+                <br><br>
+                <button class="btn-gold" onclick="selectOffer('Festival Sale 60% OFF')">CLAIM DISCOUNT</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="timing">
+        <p>🕙 Store Timings: 10:00 AM to 09:30 PM (Open All Days)</p>
+    </div>
+
+    <section id="order" class="section-padding enquiry-section">
+        <div class="container">
+            <h2 class="section-title text-center">Quick <span>Enquiry</span></h2>
+            <br>
+            <div class="form-frame fade-in">
+                <div class="form-inner">
+                    <form id="festivalForm">
+                        <div class="input-group">
+                            <label>Your Name</label>
+                            <input type="text" id="fName" class="form-input" placeholder="Enter Full Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Mobile Number</label>
+                            <input type="tel" id="fMobile" class="form-input" placeholder="10 Digit Number" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Interested Category</label>
+                            <select id="fCategory" class="form-input">
+                                <option value="Mega Sale (Up to 60% OFF)">Mega Sale (Up to 60% OFF)</option>
+                                <option value="Ethnic Wear">Ethnic Wear</option>
+                                <option value="Men's Wear">Men's Wear</option>
+                                <option value="Women's Wear">Women's Wear</option>
+                                <option value="Kids Wear">Kids Wear</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="wa-btn">
+                            👉 WhatsApp Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Utsav Fashion. Celebrating You.</p>
+    </footer>
+
+    <script>
+        // 1. Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 2. Select Offer
+        function selectOffer(val) {
+            const select = document.getElementById('fCategory');
+            select.selectedIndex = 0; // Selects the Mega Sale Option
+            document.getElementById('order').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // 3. Form Logic
+        document.getElementById('festivalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('fName').value;
+            const mobile = document.getElementById('fMobile').value;
+            const category = document.getElementById('fCategory').value;
+            const number = "7253076678";
+
+            if(mobile.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number");
+                return;
+            }
+
+            const msg = `Hello Sir, mujhe kapdo ki dukan se order / enquiry karni hai.\nName: ${name}\nMobile: ${mobile}\nCategory: ${category}`;
+            const url = `https://wa.me/91${number}?text=${encodeURIComponent(msg)}`;
+
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>
+
