@@ -3,11 +3,582 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 13</title>
+    <title>THE EMPIRE | Luxury Fitness Club</title>
+    <meta name="description" content="The Empire - An exclusive fitness sanctuary for the elite. Premium equipment, spa, and personal training.">
+    
+    <style>
+        /* --- LUXURY DESIGN VARIABLES --- */
+        :root {
+            --bg-body: #050505;
+            --bg-panel: #0a0a0a;
+            --gold: #C5A059; /* Muted Champagne Gold */
+            --gold-light: #e6cfa3;
+            --white: #ffffff;
+            --gray: #888888;
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --border-thin: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        /* --- RESET & TYPOGRAPHY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--white);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.4s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .text-center { text-align: center; }
+        .gold-text { color: var(--gold); }
+
+        .section-padding { padding: 120px 0; }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 18px 50px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .btn-luxury:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 20px auto;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 0;
+            transition: 0.4s;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
+        }
+
+        header.scrolled {
+            background: rgba(5,5,5,0.95);
+            padding: 15px 0;
+            border-bottom: var(--border-thin);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .brand span { color: var(--gold); }
+
+        .nav-list { display: flex; gap: 40px; }
+        
+        .nav-list a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-list a:hover { color: var(--gold); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.7); /* Dark overlay */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            color: var(--white);
+        }
+
+        /* --- AMENITIES --- */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .amenity-item {
+            text-align: center;
+            padding: 20px;
+            transition: 0.5s;
+        }
+
+        .amenity-item:hover { transform: translateY(-10px); }
+
+        .amenity-icon {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .amenity-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-family: var(--font-serif);
+        }
+
+        .amenity-item p { font-size: 0.9rem; color: var(--gray); }
+
+        /* --- TIMING (Elegant Minimal) --- */
+        .timing-section {
+            background: var(--bg-panel);
+            border-top: var(--border-thin);
+            border-bottom: var(--border-thin);
+        }
+
+        .timing-row {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .timing-col { text-align: center; }
+        .timing-col h4 { color: var(--gold); letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; }
+        .timing-col p { font-size: 2rem; font-family: var(--font-serif); }
+
+        /* --- PRICING (Table/Card Hybrid) --- */
+        .pricing-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .price-panel {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 60px 40px;
+            width: 350px;
+            text-align: center;
+            transition: 0.5s;
+            position: relative;
+        }
+
+        .price-panel:hover {
+            border-color: var(--gold);
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        .price-panel.featured { border: 1px solid var(--gold); }
+
+        .price-panel h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--white); }
+        
+        .price-amount {
+            font-size: 3rem;
+            color: var(--gold);
+            font-family: var(--font-serif);
+            margin: 20px 0;
+            display: block;
+        }
+
+        .price-amount sub { font-size: 1rem; color: var(--gray); font-style: italic; }
+
+        .price-features li {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+        
+        .price-features li:last-child { border-bottom: none; }
+
+        .select-btn {
+            margin-top: 20px;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--gray);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .price-panel:hover .select-btn { border-color: var(--gold); color: var(--gold); }
+
+        /* --- CONCIERGE (Booking Form) --- */
+        .concierge-section {
+            background: url('https://images.unsplash.com/photo-1574680096141-1cddd32e04ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover fixed;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(5,5,5,0.9);
+            position: absolute;
+            inset: 0;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .luxury-form { margin-top: 50px; }
+
+        .form-group { margin-bottom: 40px; text-align: left; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-family: var(--font-serif);
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-bottom-color: var(--gold);
+        }
+
+        select.form-control option { background: #000; }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: var(--border-thin);
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span { color: var(--gold); }
+        
+        .copy { color: var(--gray); font-size: 0.8rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-list { display: none; }
+            .container { padding: 0 20px; }
+            .pricing-wrapper { gap: 20px; }
+        }
+
+        /* --- ANIMATION --- */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 1s ease; }
+        .fade-in.appear { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 13</h1>
-    <p>This is the page for Shop 13.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="brand">The <span>Empire</span></a>
+                <div class="nav-list">
+                    <a href="#amenities">Wellness</a>
+                    <a href="#schedule">Hours</a>
+                    <a href="#membership">Membership</a>
+                    <a href="#concierge">Concierge</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle fade-in">Exclusive Fitness Club</span>
+            <h1 class="fade-in">Sculpt Your <br> Legacy</h1>
+            <div class="divider fade-in"></div>
+            <a href="#concierge" class="btn-luxury fade-in">Request Access</a>
+        </div>
+    </section>
+
+    <section id="amenities" class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <span class="gold-text" style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">The Experience</span>
+                <h2 style="font-size: 2.5rem; margin-top: 10px;">World Class Amenities</h2>
+            </div>
+
+            <div class="amenities-grid">
+                <div class="amenity-item fade-in">
+                    <span class="amenity-icon">✦</span>
+                    <h3>Weight Sanctuary</h3>
+                    <p>Precision engineered equipment for optimal hypertrophy.</p>
+                </div>
+                <div class="amenity-item fade-in">
+                    <span class="amenity-icon">≋</span>
+                    <h3>Cardio Suite</h3>
+                    <p>Endurance training with immersive technology.</p>
+                </div>
+                <div class="amenity-item fade-in">
+                    <span class="amenity-icon">★</span>
+                    <h3>Elite Trainers</h3>
+                    <p>Personalized coaching from championship athletes.</p>
+                </div>
+                <div class="amenity-item fade-in">
+                    <span class="amenity-icon">☯</span>
+                    <h3>Zen Studio</h3>
+                    <p>Yoga and pilates for mind-body alignment.</p>
+                </div>
+                <div class="amenity-item fade-in">
+                    <span class="amenity-icon">♨</span>
+                    <h3>Spa & Steam</h3>
+                    <p>Luxury recovery facilities to rejuvenate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="schedule" class="section-padding timing-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2>Operating Hours</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="timing-row fade-in">
+                <div class="timing-col">
+                    <h4>Morning Sessions</h4>
+                    <p>05:00 <span style="font-size: 1rem; color:var(--gray)">AM</span> — 10:00 <span style="font-size: 1rem; color:var(--gray)">AM</span></p>
+                </div>
+                <div class="timing-col">
+                    <h4>Evening Sessions</h4>
+                    <p>04:00 <span style="font-size: 1rem; color:var(--gray)">PM</span> — 10:00 <span style="font-size: 1rem; color:var(--gray)">PM</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="membership" class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <span class="gold-text" style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">Invest In Yourself</span>
+                <h2 style="font-size: 2.5rem; margin-top: 10px;">Membership Tiers</h2>
+            </div>
+
+            <div class="pricing-wrapper">
+                <div class="price-panel fade-in">
+                    <h3>Executive</h3>
+                    <span class="price-amount">₹999 <sub>/ mo</sub></span>
+                    <ul class="price-features">
+                        <li>Access to Gym Floor</li>
+                        <li>Cardio Suite Access</li>
+                        <li>Locker Amenities</li>
+                        <li>General Guidance</li>
+                    </ul>
+                    <button onclick="selectTier('Monthly')" class="select-btn">Select Tier</button>
+                </div>
+
+                <div class="price-panel featured fade-in">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #000; padding: 5px 15px; font-size: 0.7rem; font-weight: bold; letter-spacing: 1px;">RECOMMENDED</div>
+                    <h3>Prestige</h3>
+                    <span class="price-amount">₹2499 <sub>/ qtr</sub></span>
+                    <ul class="price-features">
+                        <li><strong>Includes Executive Benefits</strong></li>
+                        <li>Nutritional Consultation</li>
+                        <li>Weekly Spa Access</li>
+                        <li>1 Personal Training Session</li>
+                    </ul>
+                    <button onclick="selectTier('Quarterly')" class="select-btn" style="border-color: var(--gold); color: var(--gold);">Select Tier</button>
+                </div>
+
+                <div class="price-panel fade-in">
+                    <h3>Imperial</h3>
+                    <span class="price-amount">₹7999 <sub>/ yr</sub></span>
+                    <ul class="price-features">
+                        <li><strong>Includes Prestige Benefits</strong></li>
+                        <li>Unlimited Spa & Steam</li>
+                        <li>Priority Concierge</li>
+                        <li>Exclusive Empire Merchandise</li>
+                    </ul>
+                    <button onclick="selectTier('Yearly')" class="select-btn">Select Tier</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="concierge" class="section-padding concierge-section">
+        <div class="overlay"></div>
+        <div class="container form-container">
+            <span class="gold-text fade-in" style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem;">Join The Club</span>
+            <h2 class="fade-in" style="font-size: 3rem; margin-bottom: 20px;">Begin Your Journey</h2>
+            
+            <form id="luxuryForm" class="luxury-form fade-in">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="cName" class="form-control" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile Contact</label>
+                    <input type="tel" id="cMobile" class="form-control" placeholder="Enter your number" pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Membership</label>
+                    <select id="cPlan" class="form-control">
+                        <option value="Monthly">Executive (Monthly) - ₹999</option>
+                        <option value="Quarterly">Prestige (Quarterly) - ₹2499</option>
+                        <option value="Yearly">Imperial (Yearly) - ₹7999</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-luxury" style="width: 100%; margin-top: 20px;">
+                    Confirm via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">The <span>Empire</span></a>
+            <p class="copy">© 2025 The Empire Fitness Club. Reserved for the dedicated.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Navigation Scrolled Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Intersection Observer for Fade In
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 3. Plan Selection
+        function selectTier(planValue) {
+            document.getElementById('cPlan').value = planValue;
+            document.getElementById('concierge').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 4. Form Handling
+        document.getElementById('luxuryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('cName').value;
+            const mobile = document.getElementById('cMobile').value;
+            const plan = document.getElementById('cPlan').value;
+            const targetNumber = "7253076678";
+
+            if (mobile.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            const message = `Hello Sir, mujhe gym join karna hai. Name: ${name} , Mobile: ${mobile} , Plan: ${plan}`;
+            const whatsappURL = `https://wa.me/91${targetNumber}?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
 </body>
 </html>
+
