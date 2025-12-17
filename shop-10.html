@@ -3,11 +3,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 10</title>
+    <title>IronCore Gym | Limitless Strength</title>
+    <meta name="description" content="IronCore Gym - The ultimate destination for bodybuilding, cardio, and fitness.">
+    
+    <style>
+        /* --- 1. VARIABLES & RESET --- */
+        :root {
+            --primary: #FFD700; /* Gold/Yellow */
+            --dark: #000000;
+            --grey: #1a1a1a;
+            --light: #ffffff;
+            --accent: #333333;
+            --font-main: 'Arial', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 2. UTILITY CLASSES --- */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--dark);
+            padding: 12px 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--light);
+            transform: scale(1.05);
+        }
+
+        .section-padding { padding: 80px 0; }
+        
+        .heading {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .heading::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            background-color: rgba(0,0,0,0.9);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-style: italic;
+            color: var(--light);
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-menu { display: flex; gap: 25px; }
+
+        .nav-menu a {
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .nav-menu a:hover { color: var(--primary); }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-text span {
+            color: var(--primary);
+            -webkit-text-stroke: 1px var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            color: #ddd;
+        }
+
+        /* --- 5. SERVICES (GRID LAYOUT) --- */
+        .services { background-color: var(--grey); }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .service-box {
+            background: var(--dark);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-box:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .service-box h3 {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .icon { font-size: 2.5rem; color: var(--primary); }
+
+        /* --- 6. TIMING & STATS --- */
+        .timing-section {
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .timing-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .time-card {
+            background: #111;
+            border: 1px solid var(--primary);
+            padding: 20px 40px;
+            border-radius: 0;
+            min-width: 250px;
+        }
+
+        .time-card h4 { color: var(--primary); font-size: 1.5rem; margin-bottom: 5px; }
+        .time-card p { font-size: 1.1rem; font-weight: bold; }
+
+        /* --- 7. PRICING --- */
+        .pricing { background-color: var(--grey); }
+        
+        .price-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .price-card {
+            background: var(--dark);
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+            border-top: 5px solid transparent;
+        }
+
+        .price-card:hover {
+            border-top: 5px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .price span { font-size: 1rem; color: #777; font-weight: 400; }
+        
+        .benefits li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .benefits li:last-child { border: none; }
+
+        /* --- 8. BOOKING FORM --- */
+        .booking-section {
+            background: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.85);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .input-group { margin-bottom: 20px; }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 2px solid #555;
+            color: white;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: rgba(0,0,0,0.5);
+        }
+
+        select option { background: #000; }
+
+        .whatsapp-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: #25D366;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .whatsapp-submit:hover { background-color: #128C7E; }
+
+        /* --- 9. FOOTER --- */
+        footer {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #333;
+            background: #000;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2.5rem; }
+            .nav-menu { display: none; } /* Simplified for mobile */
+            .logo { font-size: 1.5rem; }
+            .btn { width: 100%; text-align: center; }
+        }
+        
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 10</h1>
-    <p>This is the page for Shop 10.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">IRON<span>CORE</span></div>
+            <nav class="nav-menu">
+                <a href="#services">Facilities</a>
+                <a href="#pricing">Membership</a>
+                <a href="#contact" style="color: var(--primary);">Join Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-text">
+            <h1>Forge Your <br><span>Ultimate</span> Body</h1>
+            <p>No excuses. Just results. Join the most hardcore training facility in the city. Premium equipment, expert trainers, iron will.</p>
+            <a href="#contact" class="btn">Start Your Journey</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding services">
+        <div class="container">
+            <h2 class="heading">Our Arsenal</h2>
+            <div class="service-grid">
+                <div class="service-box reveal">
+                    <div class="icon">💪</div>
+                    <h3>Weight Training</h3>
+                    <p>Olympic barbells, heavy dumbbells, and machines.</p>
+                </div>
+                <div class="service-box reveal">
+                    <div class="icon">⚡</div>
+                    <h3>Cardio Zone</h3>
+                    <p>Treadmills & Rowers to burn maximum calories.</p>
+                </div>
+                <div class="service-box reveal">
+                    <div class="icon">🏋️</div>
+                    <h3>Personal Trainer</h3>
+                    <p>1-on-1 coaching to perfect your form.</p>
+                </div>
+                <div class="service-box reveal">
+                    <div class="icon">🧘</div>
+                    <h3>Yoga & Zumba</h3>
+                    <p>Holistic fitness for flexibility and rhythm.</p>
+                </div>
+                <div class="service-box reveal">
+                    <div class="icon">🚿</div>
+                    <h3>Steam / Shower</h3>
+                    <p>Luxury changing rooms and steam bath.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding timing-section">
+        <div class="container">
+            <h2 class="heading">Training Hours</h2>
+            <div class="timing-wrapper">
+                <div class="time-card reveal">
+                    <h4>MORNING</h4>
+                    <p>05:00 AM – 10:00 AM</p>
+                </div>
+                <div class="time-card reveal">
+                    <h4>EVENING</h4>
+                    <p>04:00 PM – 10:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section-padding pricing">
+        <div class="container">
+            <h2 class="heading">Membership Plans</h2>
+            <div class="price-container">
+                <div class="price-card reveal">
+                    <h3>Monthly</h3>
+                    <div class="price">₹999<span>/mo</span></div>
+                    <ul class="benefits">
+                        <li>Gym Floor Access</li>
+                        <li>Cardio Zone</li>
+                        <li>General Training</li>
+                        <li>Locker Access</li>
+                    </ul>
+                    <br>
+                    <button onclick="scrollToForm('Monthly')" class="btn" style="width:100%">Choose Plan</button>
+                </div>
+
+                <div class="price-card reveal" style="border-top: 5px solid var(--primary); transform: scale(1.05);">
+                    <div style="background:var(--primary); color:black; font-weight:bold; padding:5px;">MOST POPULAR</div>
+                    <h3>Quarterly</h3>
+                    <div class="price">₹2499<span>/3mo</span></div>
+                    <ul class="benefits">
+                        <li>All Monthly Benefits</li>
+                        <li><strong>Free Diet Chart</strong></li>
+                        <li>Steam Bath Access</li>
+                        <li>Group Classes</li>
+                    </ul>
+                    <br>
+                    <button onclick="scrollToForm('Quarterly')" class="btn" style="width:100%">Choose Plan</button>
+                </div>
+
+                <div class="price-card reveal">
+                    <h3>Yearly</h3>
+                    <div class="price">₹7999<span>/yr</span></div>
+                    <ul class="benefits">
+                        <li>VIP Access</li>
+                        <li>Unlimited Steam</li>
+                        <li>Personal Trainer (2 Sessions)</li>
+                        <li>Free Gym Kit</li>
+                    </ul>
+                    <br>
+                    <button onclick="scrollToForm('Yearly')" class="btn" style="width:100%">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding booking-section">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="form-container reveal">
+                <h2 class="heading" style="margin-bottom: 30px;">Book Your Spot</h2>
+                <form id="bookingForm">
+                    <div class="input-group">
+                        <label>Your Name</label>
+                        <input type="text" id="uName" class="input-field" placeholder="Enter full name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" id="uMobile" class="input-field" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Select Plan</label>
+                        <select id="uPlan" class="input-field">
+                            <option value="Monthly">Monthly (₹999)</option>
+                            <option value="Quarterly">Quarterly (₹2499)</option>
+                            <option value="Yearly">Yearly (₹7999)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="whatsapp-submit">
+                        WhatsApp Par Booking Kare 
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>IronCore Gym &copy; 2025 | Built for Strength</p>
+    </footer>
+
+    <script>
+        // 1. Scroll Animation Logic
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // Trigger once on load
+        reveal();
+
+        // 2. Helper to scroll to form and select plan
+        function scrollToForm(planValue) {
+            document.getElementById('uPlan').value = planValue;
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 3. Form Submission & WhatsApp Redirect
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var name = document.getElementById('uName').value;
+            var mobile = document.getElementById('uMobile').value;
+            var plan = document.getElementById('uPlan').value;
+            var gymNumber = "7253076678";
+
+            // Validation check (Basic)
+            if(mobile.length < 10) {
+                alert("Please enter a valid 10 digit number");
+                return;
+            }
+
+            // Construct Message
+            var msg = `Hello Sir, mujhe gym join karna hai. Name: ${name} , Mobile: ${mobile} , Plan: ${plan}`;
+            
+            // Create WhatsApp Link
+            var url = `https://wa.me/91${gymNumber}?text=${encodeURIComponent(msg)}`;
+            
+            // Open Link
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>
+
