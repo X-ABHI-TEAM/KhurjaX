@@ -3,11 +3,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 15</title>
+    <title>URBAN CUTS | Next Gen Boys Salon</title>
+    <meta name="description" content="Urban Cuts - Stylish haircuts, beard grooming and trendy looks for boys. Book via WhatsApp.">
+    
+    <style>
+        /* --- 1. FONTS & VARIABLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+        :root {
+            --primary: #ff4757; /* Trendy Red/Pink */
+            --dark: #2f3542;
+            --light: #f1f2f6;
+            --white: #ffffff;
+            --gradient: linear-gradient(45deg, #ff4757, #ff6b81);
+            --shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- 2. GLOBAL STYLES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.5);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+
+        .section-title span { color: var(--primary); }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        section { padding: 80px 0; }
+
+        /* --- 3. NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(47, 53, 66, 0.8), rgba(47, 53, 66, 0.8)), url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- 5. SERVICES --- */
+        .services { background: var(--light); }
+
+        .service-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .service-box {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            width: 250px;
+            transition: 0.4s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--gradient);
+        }
+
+        .s-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .service-box h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .service-box p { font-size: 0.9rem; color: #777; }
+
+        /* --- 6. PRICE LIST --- */
+        .price-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .price-row:hover { transform: scale(1.02); }
+
+        .p-name { font-weight: 700; font-size: 1.1rem; }
+        .p-cost { 
+            background: var(--dark); 
+            color: white; 
+            padding: 5px 15px; 
+            border-radius: 20px; 
+            font-weight: 600;
+        }
+
+        /* --- 7. TIMING --- */
+        .timing-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .timing-section .section-title { color: white; }
+
+        .time-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .time-card {
+            border: 2px dashed rgba(255,255,255,0.2);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .time-card h3 { color: var(--primary); margin-bottom: 10px; }
+        .time-card p { font-size: 1.5rem; font-weight: 600; }
+
+        /* --- 8. BOOKING FORM --- */
+        .booking-section {
+            background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover fixed;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-box {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-input:focus { border-color: var(--primary); }
+
+        select.form-input {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover { background: #1ebc59; transform: scale(1.02); }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--dark);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .form-box { padding: 30px; }
+            .logo { font-size: 1.5rem; }
+        }
+
+        /* --- ANIMATIONS --- */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 0.6s ease;
+        }
+        .slide-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 15</h1>
-    <p>This is the page for Shop 15.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <nav>
+        <div class="logo">URBAN <span>CUTS</span></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#prices">Rates</a>
+            <a href="#booking">Book Now</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="slide-up">Level Up <br> Your Style</h1>
+            <p class="slide-up">Trendsetting Haircuts & Beard Grooming for Boys.</p>
+            <a href="#booking" class="btn-main slide-up">Get Groomed</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Fresh <span>Styles</span></h2>
+            <p class="subtitle">What we do best</p>
+            
+            <div class="service-container">
+                <div class="service-box slide-up">
+                    <div class="s-icon">✂️</div>
+                    <h3>Hair Styling</h3>
+                    <p>Fades, Undercuts, and Textured Crops.</p>
+                </div>
+                <div class="service-box slide-up">
+                    <div class="s-icon">🧔</div>
+                    <h3>Beard Game</h3>
+                    <p>Shape, Trim and Line-up perfection.</p>
+                </div>
+                <div class="service-box slide-up">
+                    <div class="s-icon">🧼</div>
+                    <h3>Face Detox</h3>
+                    <p>Deep cleansing for a fresh look.</p>
+                </div>
+                <div class="service-box slide-up">
+                    <div class="s-icon">💆</div>
+                    <h3>Relaxation</h3>
+                    <p>Head massage to relieve stress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prices">
+        <div class="container">
+            <h2 class="section-title">The <span>Menu</span></h2>
+            <p class="subtitle">Fair prices for premium cuts</p>
+
+            <div class="price-list">
+                <div class="price-row slide-up">
+                    <span class="p-name">Trendy Hair Cut</span>
+                    <span class="p-cost">₹100</span>
+                </div>
+                <div class="price-row slide-up">
+                    <span class="p-name">Beard Sculpting</span>
+                    <span class="p-cost">₹80</span>
+                </div>
+                <div class="price-row slide-up">
+                    <span class="p-name">Combo (Cut + Beard)</span>
+                    <span class="p-cost">₹150</span>
+                </div>
+                <div class="price-row slide-up">
+                    <span class="p-name">Face Clean Up</span>
+                    <span class="p-cost">₹199</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timing-section">
+        <div class="container">
+            <h2 class="section-title">Open <span>Hours</span></h2>
+            <div class="time-wrapper slide-up">
+                <div class="time-card">
+                    <h3>☀️ MORNING</h3>
+                    <p>9:00 AM – 1:00 PM</p>
+                </div>
+                <div class="time-card">
+                    <h3>🌙 EVENING</h3>
+                    <p>4:00 PM – 9:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking-section">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="form-box slide-up">
+                <h2 class="section-title" style="font-size: 2rem;">Book a <span>Seat</span></h2>
+                <p style="margin-bottom: 30px; color: #777;">Don't wait in line. Book online.</p>
+                
+                <form id="urbanForm">
+                    <input type="text" id="uName" class="form-input" placeholder="Your Name" required>
+                    <input type="tel" id="uMobile" class="form-input" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+                    <select id="uService" class="form-input">
+                        <option value="Hair Cut">Hair Cut - ₹100</option>
+                        <option value="Beard Trim">Beard Trim - ₹80</option>
+                        <option value="Combo">Combo (Cut+Beard) - ₹150</option>
+                        <option value="Face Clean Up">Face Clean Up - ₹199</option>
+                    </select>
+                    
+                    <button type="submit" class="whatsapp-btn">
+                        WHATSAPP BOOKING
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 URBAN CUTS. Stay Stylish.</p>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('.slide-up').forEach((el) => observer.observe(el));
+
+        // Form Logic
+        document.getElementById('urbanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('uName').value;
+            const mobile = document.getElementById('uMobile').value;
+            const service = document.getElementById('uService').value;
+            const number = "7253076678";
+
+            if(mobile.length !== 10) {
+                alert("Enter valid 10 digit number");
+                return;
+            }
+
+            const msg = `Hello Sir, mujhe boys salon me booking karni hai.\nName: ${name}\nMobile: ${mobile}\nService: ${service}`;
+            const url = `https://wa.me/91${number}?text=${encodeURIComponent(msg)}`;
+
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>
+
