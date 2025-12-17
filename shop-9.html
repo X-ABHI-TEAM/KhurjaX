@@ -1,13 +1,614 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 9</title>
+    <title>Titan Fitness | Transform Your Body</title>
+    <meta name="description" content="Join Titan Fitness for Weight Training, Cardio, Yoga and more. Best Gym in town.">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --primary-color: #ff4500; /* Energetic Orange */
+            --secondary-color: #1e1e1e;
+            --bg-dark: #121212;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --card-bg: #1f1f1f;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 50px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* --- TIMING SECTION --- */
+        .timing {
+            background-color: var(--secondary-color);
+        }
+
+        .timing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .time-box {
+            background: var(--bg-dark);
+            padding: 30px 50px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 5px solid var(--primary-color);
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .time-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .time-box p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* --- PRICING SECTION --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .price-card.popular {
+            border: 2px solid var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        /* Mobile responsive fix for popular card scale */
+        @media(max-width: 768px) {
+            .price-card.popular { transform: scale(1); }
+        }
+
+        .price-tag {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 5px 15px;
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            transform: rotate(45deg);
+            width: 120px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        /* --- CONTACT/BOOKING SECTION --- */
+        .booking {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        select.form-control option {
+            background: #222;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background-color: #25D366; /* WhatsApp Color */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1ebc57;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        footer p {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Nav Toggle */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 9</h1>
-    <p>This is the page for Shop 9.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">TITAN <span>FITNESS</span></a>
+                <div class="nav-links">
+                    <a href="#features">Services</a>
+                    <a href="#timing">Timing</a>
+                    <a href="#pricing">Plans</a>
+                    <a href="#booking">Join Now</a>
+                </div>
+                <div class="mobile-menu-btn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Build Your <br><span>Dream Physique</span></h1>
+            <p>Professional Trainers • Modern Equipment • Premium Vibe</p>
+            <a href="#booking" class="cta-btn">Start Training Today</a>
+        </div>
+    </section>
+
+    <section id="features" class="container">
+        <h2 class="section-title">Why <span>Choose Us</span></h2>
+        <p class="section-subtitle">Everything you need to crush your fitness goals</p>
+        
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🏋️‍♂️</div>
+                <h3>Weight Training</h3>
+                <p>Heavy duty equipment for muscle building and strength.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🏃‍♂️</div>
+                <h3>Cardio Zone</h3>
+                <p>Advanced treadmills, ellipticals, and cycles for endurance.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">👨‍🏫</div>
+                <h3>Personal Trainer</h3>
+                <p>Certified coaches to guide your diet and workout.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🧘‍♀️</div>
+                <h3>Zumba & Yoga</h3>
+                <p>Group classes for flexibility, fun, and mental peace.</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🧖‍♂️</div>
+                <h3>Steam & Shower</h3>
+                <p>Relax your muscles after an intense workout session.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="timing" class="timing">
+        <div class="container">
+            <h2 class="section-title">Gym <span>Timings</span></h2>
+            <p class="section-subtitle">Open 7 days a week</p>
+            
+            <div class="timing-container">
+                <div class="time-box fade-in">
+                    <h3>☀️ Morning Batch</h3>
+                    <p>5:00 AM – 10:00 AM</p>
+                </div>
+                <div class="time-box fade-in">
+                    <h3>🌙 Evening Batch</h3>
+                    <p>4:00 PM – 10:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="container">
+        <h2 class="section-title">Membership <span>Plans</span></h2>
+        <p class="section-subtitle">Affordable pricing for premium facilities</p>
+
+        <div class="pricing-grid">
+            <div class="price-card fade-in">
+                <h3>Monthly</h3>
+                <div class="amount">₹999</div>
+                <ul class="features-list">
+                    <li>✓ Full Gym Access</li>
+                    <li>✓ Cardio Included</li>
+                    <li>✓ Locker Facility</li>
+                    <li>✓ General Trainer Support</li>
+                </ul>
+                <a href="#booking" onclick="selectPlan('Monthly')" class="cta-btn">Select Plan</a>
+            </div>
+
+            <div class="price-card popular fade-in">
+                <div class="price-tag">BEST VALUE</div>
+                <h3>Quarterly</h3>
+                <div class="amount">₹2499</div>
+                <ul class="features-list">
+                    <li>✓ 3 Months Access</li>
+                    <li>✓ Free Diet Consultation</li>
+                    <li>✓ Steam Bath (Weekly)</li>
+                    <li>✓ 1 Personal Session Free</li>
+                </ul>
+                <a href="#booking" onclick="selectPlan('Quarterly')" class="cta-btn">Select Plan</a>
+            </div>
+
+            <div class="price-card fade-in">
+                <h3>Yearly</h3>
+                <div class="amount">₹7999</div>
+                <ul class="features-list">
+                    <li>✓ 12 Months Access</li>
+                    <li>✓ Unlimited Steam Bath</li>
+                    <li>✓ Free Gym T-shirt</li>
+                    <li>✓ Priority Support</li>
+                </ul>
+                <a href="#booking" onclick="selectPlan('Yearly')" class="cta-btn">Select Plan</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2 class="section-title" style="color: #fff;">Join <span>Now</span></h2>
+            <div class="form-box fade-in">
+                <form id="gymForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" id="mobile" class="form-control" placeholder="Enter mobile number" required pattern="[0-9]{10}">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Plan</label>
+                        <select id="plan" class="form-control">
+                            <option value="Monthly">Monthly - ₹999</option>
+                            <option value="Quarterly">Quarterly - ₹2499</option>
+                            <option value="Yearly">Yearly - ₹7999</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="whatsapp-btn">
+                        <span>💬</span> WhatsApp Par Booking Kare
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">TITAN <span>FITNESS</span></a>
+            <p>© 2025 Titan Fitness. All Rights Reserved.</p>
+            <p>📍 Main Market Road, City Center</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Function to pre-select plan from Pricing section
+        function selectPlan(planName) {
+            document.getElementById('plan').value = planName;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 2. Scroll Animation (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 3. Form Submission & WhatsApp Logic
+        document.getElementById('gymForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get Values
+            const name = document.getElementById('name').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const plan = document.getElementById('plan').value;
+
+            // Basic Validation
+            if (name === "" || mobile === "") {
+                alert("Please fill all details.");
+                return;
+            }
+
+            if (mobile.length !== 10) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return;
+            }
+
+            // WhatsApp Logic
+            // Message: "Hello Sir, mujhe gym join karna hai. Name: ___ , Mobile: ___ , Plan: ___"
+            const message = `Hello Sir, mujhe gym join karna hai. Name: ${name} , Mobile: ${mobile} , Plan: ${plan}`;
+            
+            // Encode URI for web safety
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "7253076678"; // Fixed Number
+
+            // Open WhatsApp
+            const url = `https://wa.me/91${whatsappNumber}?text=${encodedMessage}`;
+            window.open(url, '_blank');
+        });
+    </script>
 </body>
 </html>
