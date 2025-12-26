@@ -2,12 +2,572 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 21</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vybbe - Order Online</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00acee;
+            --dark: #1e1e1e;
+            --gray: #f5f7fa;
+            --white: #ffffff;
+            --green: #2ecc71;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--gray);
+            color: var(--dark);
+            padding-bottom: 120px; /* Space for cart bar */
+        }
+
+        /* HERO & NAV (Same as before) */
+        .hero {
+            position: relative;
+            height: 200px;
+            background: url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=1000&auto=format&fit=crop') center/cover;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 20px; color: white;
+            border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+        }
+        .brand-name { font-size: 2.2rem; font-weight: 700; color: var(--primary); }
+
+        .category-nav {
+            position: sticky; top: 0; background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(5px); padding: 15px; display: flex; gap: 10px;
+            overflow-x: auto; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .category-nav::-webkit-scrollbar { display: none; }
+        .cat-btn {
+            background: #eee; padding: 8px 18px; border-radius: 50px;
+            font-size: 0.9rem; font-weight: 600; color: #555; text-decoration: none; white-space: nowrap;
+        }
+        .cat-btn.active { background: var(--dark); color: white; }
+
+        /* MENU ITEMS */
+        .menu-container { padding: 20px 15px; }
+        .section-title { font-size: 1.3rem; font-weight: 800; margin: 25px 0 15px; color: var(--dark); }
+
+        .food-card {
+            background: var(--white); border-radius: 16px; padding: 12px;
+            margin-bottom: 15px; box-shadow: var(--shadow);
+            display: flex; gap: 12px;
+        }
+
+        .card-img-box {
+            width: 85px; height: 85px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
+        }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-title { font-weight: 700; font-size: 1rem; margin-bottom: 5px; line-height: 1.2; }
+        .veg-icon { color: var(--green); font-size: 0.7rem; margin-right: 5px; border: 1px solid var(--green); padding: 1px 3px; border-radius: 3px; }
+
+        /* VARIANT ROW (Half/Full) */
+        .variant-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 8px; border-top: 1px dashed #eee; padding-top: 8px;
+        }
+        .variant-label { font-size: 0.8rem; color: #777; font-weight: 500; }
+        .variant-price { font-size: 0.9rem; font-weight: 700; color: var(--dark); }
+
+        /* QUANTITY BUTTONS */
+        .add-btn-container {
+            width: 80px; height: 30px; position: relative;
+        }
+        
+        .btn-add-initial {
+            width: 100%; height: 100%; background: #f0f8ff; color: var(--primary);
+            border: 1px solid var(--primary); border-radius: 6px;
+            font-weight: 700; font-size: 0.8rem; cursor: pointer;
+        }
+
+        .qty-control {
+            display: none; /* Hidden initially */
+            width: 100%; height: 100%; background: var(--primary);
+            border-radius: 6px; align-items: center; justify-content: space-between;
+            color: white; font-weight: 700; font-size: 0.9rem;
+        }
+        
+        .qty-btn {
+            width: 25px; height: 100%; border: none; background: transparent;
+            color: white; font-size: 1.1rem; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+        }
+
+        /* CART BOTTOM BAR */
+        .cart-bar {
+            position: fixed; bottom: 20px; left: 15px; right: 15px;
+            background: var(--dark); color: white;
+            padding: 15px 20px; border-radius: 15px;
+            display: none; /* Hidden if cart empty */
+            align-items: center; justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 999; animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from {transform: translateY(100px);} to {transform: translateY(0);} }
+
+        .cart-info h4 { font-size: 0.8rem; opacity: 0.8; font-weight: 400; text-transform: uppercase; }
+        .cart-info h3 { font-size: 1.2rem; font-weight: 700; }
+        
+        .btn-order {
+            background: var(--green); color: white; padding: 10px 20px;
+            border-radius: 10px; text-decoration: none; font-weight: 600;
+            display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 21</h1>
-    <p>This is the page for Shop 21.</p>
-    <a href="index.html">Back to Shop List</a>
+
+    <header class="hero">
+        <div class="hero-overlay">
+            <h1 class="brand-name">_vybbe_</h1>
+            <p>Hungry? Order Now!</p>
+            <p style="margin-top: 10px;"><a href="https://www.instagram.com/_vybbe__?igsh=Mjlrc255dmdueHZn" target="_blank" style="color:#00acee; text-decoration:underline;"><i class="fab fa-instagram"></i> Follow us on Instagram</a></p>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <a href="#momos" class="cat-btn active">🥟 Momos</a>
+        <a href="#rolls" class="cat-btn">🌯 Rolls</a>
+        <a href="#drinks" class="cat-btn">🥤 Drinks</a>
+    </nav>
+
+    <div class="menu-container">
+
+        <h2 id="momos" class="section-title">Momos Specials</h2>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaDctJSEvvilHwOQengc5cKSpJN8Hv2sUokQ&s" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Veg Steamed</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">Half</span> <span class="variant-price">₹39</span></div>
+                    <div class="add-btn-container" id="btn-box-vs-h">
+                        <button class="btn-add-initial" onclick="updateCart('Veg Steamed (Half)', 39, 1, 'vs-h')">ADD</button>
+                        <div class="qty-control" id="qty-box-vs-h">
+                            <button class="qty-btn" onclick="updateCart('Veg Steamed (Half)', 39, -1, 'vs-h')">-</button>
+                            <span id="count-vs-h">1</span>
+                            <button class="qty-btn" onclick="updateCart('Veg Steamed (Half)', 39, 1, 'vs-h')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">Full</span> <span class="variant-price">₹59</span></div>
+                    <div class="add-btn-container" id="btn-box-vs-f">
+                        <button class="btn-add-initial" onclick="updateCart('Veg Steamed (Full)', 59, 1, 'vs-f')">ADD</button>
+                        <div class="qty-control" id="qty-box-vs-f">
+                            <button class="qty-btn" onclick="updateCart('Veg Steamed (Full)', 59, -1, 'vs-f')">-</button>
+                            <span id="count-vs-f">1</span>
+                            <button class="qty-btn" onclick="updateCart('Veg Steamed (Full)', 59, 1, 'vs-f')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOYfpI1RHXP4cVVJF_EM6zByzt45zBHPBoEA&s" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Paneer Steamed</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">Half</span> <span class="variant-price">₹49</span></div>
+                    <div class="add-btn-container" id="btn-box-ps-h">
+                        <button class="btn-add-initial" onclick="updateCart('Paneer Steamed (Half)', 49, 1, 'ps-h')">ADD</button>
+                        <div class="qty-control" id="qty-box-ps-h">
+                            <button class="qty-btn" onclick="updateCart('Paneer Steamed (Half)', 49, -1, 'ps-h')">-</button>
+                            <span id="count-ps-h">1</span>
+                            <button class="qty-btn" onclick="updateCart('Paneer Steamed (Half)', 49, 1, 'ps-h')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">Full</span> <span class="variant-price">₹79</span></div>
+                    <div class="add-btn-container" id="btn-box-ps-f">
+                        <button class="btn-add-initial" onclick="updateCart('Paneer Steamed (Full)', 79, 1, 'ps-f')">ADD</button>
+                        <div class="qty-control" id="qty-box-ps-f">
+                            <button class="qty-btn" onclick="updateCart('Paneer Steamed (Full)', 79, -1, 'ps-f')">-</button>
+                            <span id="count-ps-f">1</span>
+                            <button class="qty-btn" onclick="updateCart('Paneer Steamed (Full)', 79, 1, 'ps-f')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://myriadrecipes.com/wp-content/uploads/2022/10/IMG_4148-500x375.jpg" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Veg Fried</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">Half</span> <span class="variant-price">₹49</span></div>
+                    <div class="add-btn-container" id="btn-box-vf-h">
+                        <button class="btn-add-initial" onclick="updateCart('Veg Fried (Half)', 49, 1, 'vf-h')">ADD</button>
+                        <div class="qty-control" id="qty-box-vf-h">
+                            <button class="qty-btn" onclick="updateCart('Veg Fried (Half)', 49, -1, 'vf-h')">-</button>
+                            <span id="count-vf-h">1</span>
+                            <button class="qty-btn" onclick="updateCart('Veg Fried (Half)', 49, 1, 'vf-h')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">Full</span> <span class="variant-price">₹69</span></div>
+                    <div class="add-btn-container" id="btn-box-vf-f">
+                        <button class="btn-add-initial" onclick="updateCart('Veg Fried (Full)', 69, 1, 'vf-f')">ADD</button>
+                        <div class="qty-control" id="qty-box-vf-f">
+                            <button class="qty-btn" onclick="updateCart('Veg Fried (Full)', 69, -1, 'vf-f')">-</button>
+                            <span id="count-vf-f">1</span>
+                            <button class="qty-btn" onclick="updateCart('Veg Fried (Full)', 69, 1, 'vf-f')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://5.imimg.com/data5/ANDROID/Default/2024/8/446858245/EE/SH/IH/119594808/product-jpeg-500x500.jpg" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Veg Kur-Kure</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">Half</span> <span class="variant-price">₹55</span></div>
+                    <div class="add-btn-container" id="btn-box-vk-h">
+                        <button class="btn-add-initial" onclick="updateCart('Veg Kur-Kure (Half)', 55, 1, 'vk-h')">ADD</button>
+                        <div class="qty-control" id="qty-box-vk-h">
+                            <button class="qty-btn" onclick="updateCart('Veg Kur-Kure (Half)', 55, -1, 'vk-h')">-</button>
+                            <span id="count-vk-h">1</span>
+                            <button class="qty-btn" onclick="updateCart('Veg Kur-Kure (Half)', 55, 1, 'vk-h')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">Full</span> <span class="variant-price">₹75</span></div>
+                    <div class="add-btn-container" id="btn-box-vk-f">
+                        <button class="btn-add-initial" onclick="updateCart('Veg Kur-Kure (Full)', 75, 1, 'vk-f')">ADD</button>
+                        <div class="qty-control" id="qty-box-vk-f">
+                            <button class="qty-btn" onclick="updateCart('Veg Kur-Kure (Full)', 75, -1, 'vk-f')">-</button>
+                            <span id="count-vk-f">1</span>
+                            <button class="qty-btn" onclick="updateCart('Veg Kur-Kure (Full)', 75, 1, 'vk-f')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://i.pinimg.com/736x/7b/7d/89/7b7d8982dabb86788a2fae3752627b73.jpg" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Paneer Kur-Kure</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">Half</span> <span class="variant-price">₹65</span></div>
+                    <div class="add-btn-container" id="btn-box-pk-h">
+                        <button class="btn-add-initial" onclick="updateCart('Paneer Kur-Kure (Half)', 65, 1, 'pk-h')">ADD</button>
+                        <div class="qty-control" id="qty-box-pk-h">
+                            <button class="qty-btn" onclick="updateCart('Paneer Kur-Kure (Half)', 65, -1, 'pk-h')">-</button>
+                            <span id="count-pk-h">1</span>
+                            <button class="qty-btn" onclick="updateCart('Paneer Kur-Kure (Half)', 65, 1, 'pk-h')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">Full</span> <span class="variant-price">₹85</span></div>
+                    <div class="add-btn-container" id="btn-box-pk-f">
+                        <button class="btn-add-initial" onclick="updateCart('Paneer Kur-Kure (Full)', 85, 1, 'pk-f')">ADD</button>
+                        <div class="qty-control" id="qty-box-pk-f">
+                            <button class="qty-btn" onclick="updateCart('Paneer Kur-Kure (Full)', 85, -1, 'pk-f')">-</button>
+                            <span id="count-pk-f">1</span>
+                            <button class="qty-btn" onclick="updateCart('Paneer Kur-Kure (Full)', 85, 1, 'pk-f')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="rolls" class="section-title">Rolls (Wrap)</h2>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh3VRCSyyyYjAxtCo4MU3IA9b-dUO3GT4RDA&s" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Chaap Roll</div>
+                <div class="variant-row">
+                    <div class="variant-price">₹49</div>
+                    <div class="add-btn-container" id="btn-box-cr">
+                        <button class="btn-add-initial" onclick="updateCart('Chaap Roll', 49, 1, 'cr')">ADD</button>
+                        <div class="qty-control" id="qty-box-cr">
+                            <button class="qty-btn" onclick="updateCart('Chaap Roll', 49, -1, 'cr')">-</button>
+                            <span id="count-cr">1</span>
+                            <button class="qty-btn" onclick="updateCart('Chaap Roll', 49, 1, 'cr')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-img-box">
+                <img src="https://www.shutterstock.com/image-photo/cottage-cheese-paneer-kathi-roll-260nw-2227554431.jpg" alt="img">
+            </div>
+            <div class="card-info">
+                <div class="item-title"><i class="fas fa-dot-circle veg-icon"></i>Paneer Roll</div>
+                <div class="variant-row">
+                    <div class="variant-price">₹69</div>
+                    <div class="add-btn-container" id="btn-box-pr">
+                        <button class="btn-add-initial" onclick="updateCart('Paneer Roll', 69, 1, 'pr')">ADD</button>
+                        <div class="qty-control" id="qty-box-pr">
+                            <button class="qty-btn" onclick="updateCart('Paneer Roll', 69, -1, 'pr')">-</button>
+                            <span id="count-pr">1</span>
+                            <button class="qty-btn" onclick="updateCart('Paneer Roll', 69, 1, 'pr')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="drinks" class="section-title">Cold Drinks On MRP</h2>
+
+        <div class="food-card">
+            <div class="card-info">
+                <div class="item-title">Coca Cola</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">1 Liter</span> <span class="variant-price">₹50</span></div>
+                    <div class="add-btn-container" id="btn-box-cc1">
+                        <button class="btn-add-initial" onclick="updateCart('Coca Cola (1L)', 50, 1, 'cc1')">ADD</button>
+                        <div class="qty-control" id="qty-box-cc1">
+                            <button class="qty-btn" onclick="updateCart('Coca Cola (1L)', 50, -1, 'cc1')">-</button>
+                            <span id="count-cc1">1</span>
+                            <button class="qty-btn" onclick="updateCart('Coca Cola (1L)', 50, 1, 'cc1')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">2 Liter</span> <span class="variant-price">₹100</span></div>
+                    <div class="add-btn-container" id="btn-box-cc2">
+                        <button class="btn-add-initial" onclick="updateCart('Coca Cola (2L)', 100, 1, 'cc2')">ADD</button>
+                        <div class="qty-control" id="qty-box-cc2">
+                            <button class="qty-btn" onclick="updateCart('Coca Cola (2L)', 100, -1, 'cc2')">-</button>
+                            <span id="count-cc2">1</span>
+                            <button class="qty-btn" onclick="updateCart('Coca Cola (2L)', 100, 1, 'cc2')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-info">
+                <div class="item-title">Pepsi</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">1 Liter</span> <span class="variant-price">₹50</span></div>
+                    <div class="add-btn-container" id="btn-box-p1">
+                        <button class="btn-add-initial" onclick="updateCart('Pepsi (1L)', 50, 1, 'p1')">ADD</button>
+                        <div class="qty-control" id="qty-box-p1">
+                            <button class="qty-btn" onclick="updateCart('Pepsi (1L)', 50, -1, 'p1')">-</button>
+                            <span id="count-p1">1</span>
+                            <button class="qty-btn" onclick="updateCart('Pepsi (1L)', 50, 1, 'p1')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">2 Liter</span> <span class="variant-price">₹100</span></div>
+                    <div class="add-btn-container" id="btn-box-p2">
+                        <button class="btn-add-initial" onclick="updateCart('Pepsi (2L)', 100, 1, 'p2')">ADD</button>
+                        <div class="qty-control" id="qty-box-p2">
+                            <button class="qty-btn" onclick="updateCart('Pepsi (2L)', 100, -1, 'p2')">-</button>
+                            <span id="count-p2">1</span>
+                            <button class="qty-btn" onclick="updateCart('Pepsi (2L)', 100, 1, 'p2')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-info">
+                <div class="item-title">Sprite</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">1 Liter</span> <span class="variant-price">₹50</span></div>
+                    <div class="add-btn-container" id="btn-box-s1">
+                        <button class="btn-add-initial" onclick="updateCart('Sprite (1L)', 50, 1, 's1')">ADD</button>
+                        <div class="qty-control" id="qty-box-s1">
+                            <button class="qty-btn" onclick="updateCart('Sprite (1L)', 50, -1, 's1')">-</button>
+                            <span id="count-s1">1</span>
+                            <button class="qty-btn" onclick="updateCart('Sprite (1L)', 50, 1, 's1')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">2 Liter</span> <span class="variant-price">₹100</span></div>
+                    <div class="add-btn-container" id="btn-box-s2">
+                        <button class="btn-add-initial" onclick="updateCart('Sprite (2L)', 100, 1, 's2')">ADD</button>
+                        <div class="qty-control" id="qty-box-s2">
+                            <button class="qty-btn" onclick="updateCart('Sprite (2L)', 100, -1, 's2')">-</button>
+                            <span id="count-s2">1</span>
+                            <button class="qty-btn" onclick="updateCart('Sprite (2L)', 100, 1, 's2')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <div class="card-info">
+                <div class="item-title">Thums Up</div>
+                
+                <div class="variant-row">
+                    <div><span class="variant-label">1 Liter</span> <span class="variant-price">₹50</span></div>
+                    <div class="add-btn-container" id="btn-box-tu1">
+                        <button class="btn-add-initial" onclick="updateCart('Thums Up (1L)', 50, 1, 'tu1')">ADD</button>
+                        <div class="qty-control" id="qty-box-tu1">
+                            <button class="qty-btn" onclick="updateCart('Thums Up (1L)', 50, -1, 'tu1')">-</button>
+                            <span id="count-tu1">1</span>
+                            <button class="qty-btn" onclick="updateCart('Thums Up (1L)', 50, 1, 'tu1')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variant-row">
+                    <div><span class="variant-label">2 Liter</span> <span class="variant-price">₹100</span></div>
+                    <div class="add-btn-container" id="btn-box-tu2">
+                        <button class="btn-add-initial" onclick="updateCart('Thums Up (2L)', 100, 1, 'tu2')">ADD</button>
+                        <div class="qty-control" id="qty-box-tu2">
+                            <button class="qty-btn" onclick="updateCart('Thums Up (2L)', 100, -1, 'tu2')">-</button>
+                            <span id="count-tu2">1</span>
+                            <button class="qty-btn" onclick="updateCart('Thums Up (2L)', 100, 1, 'tu2')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cart-bar" id="cart-bar">
+        <div class="cart-info">
+            <h4 id="total-items">0 ITEMS</h4>
+            <h3 id="total-price">₹0</h3>
+        </div>
+        <a href="#" onclick="sendToWhatsapp()" class="btn-order">
+            Place Order <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script>
+        // Store the cart items
+        let cart = {};
+
+        // Function to handle Add/Remove
+        function updateCart(itemName, price, change, id) {
+            // If item doesn't exist in cart, init it
+            if (!cart[id]) {
+                cart[id] = {
+                    name: itemName,
+                    price: price,
+                    qty: 0
+                };
+            }
+
+            // Update Quantity
+            cart[id].qty += change;
+
+            // If qty is 0 or less, remove it
+            if (cart[id].qty <= 0) {
+                delete cart[id];
+                // Show initial ADD button again
+                document.getElementById(`btn-box-${id}`).querySelector('.btn-add-initial').style.display = 'block';
+                document.getElementById(`qty-box-${id}`).style.display = 'none';
+            } else {
+                // Show Qty Controls
+                document.getElementById(`btn-box-${id}`).querySelector('.btn-add-initial').style.display = 'none';
+                document.getElementById(`qty-box-${id}`).style.display = 'flex';
+                document.getElementById(`count-${id}`).innerText = cart[id].qty;
+            }
+
+            updateTotalBar();
+        }
+
+        // Calculate Totals and Show/Hide Bar
+        function updateTotalBar() {
+            let totalQty = 0;
+            let totalPrice = 0;
+
+            for (let id in cart) {
+                totalQty += cart[id].qty;
+                totalPrice += (cart[id].price * cart[id].qty);
+            }
+
+            const bar = document.getElementById('cart-bar');
+            
+            if (totalQty > 0) {
+                bar.style.display = 'flex';
+                document.getElementById('total-items').innerText = totalQty + " ITEMS";
+                document.getElementById('total-price').innerText = "₹" + totalPrice;
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        // Send to WhatsApp
+        function sendToWhatsapp() {
+            let message = "Hello Vybbe, I want to place an order:\n\n";
+            let total = 0;
+
+            for (let id in cart) {
+                let item = cart[id];
+                let itemTotal = item.price * item.qty;
+                total += itemTotal;
+                // Format: Veg Steamed (Half) x 2 = ₹78
+                message += `▪️ ${item.name} x ${item.qty} = ₹${itemTotal}\n`;
+            }
+
+            message += `\n*Total Bill: ₹${total}*`;
+            message += "\n\nPlease confirm my order.";
+
+            // Your Phone Number Here
+            let phoneNumber = "9520760627";
+
+            let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
