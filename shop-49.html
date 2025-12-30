@@ -1,13 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop 49</title>
+    <title>QR Code Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            min-height: 100px;
+        }
+        
+        #qrcode canvas {
+            border-radius: 8px;
+        }
+        
+        .download-btn {
+            margin-top: 15px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Shop 49</h1>
-    <p>This is the page for Shop 49.</p>
-    <a href="index.html">Back to Shop List</a>
+    <div class="container">
+        <h1>X LOYAL QR Code Generator</h1>
+        
+        <div class="input-group">
+            <label for="linkInput">Apna Link Yahan Daalo:</label>
+            <input 
+                type="text" 
+                id="linkInput" 
+                placeholder="https://example.com" 
+                value="https://claude.ai"
+            >
+        </div>
+        
+        <button onclick="generateQR()">QR Code Banaao</button>
+        
+        <div id="qrcode"></div>
+        
+        <button id="downloadBtn" class="download-btn hidden" onclick="downloadQR()">
+            📥 Download Karo
+        </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        let qrCode = null;
+        
+        function generateQR() {
+            const link = document.getElementById('linkInput').value.trim();
+            const qrDiv = document.getElementById('qrcode');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (!link) {
+                alert('Pehle link daalo!');
+                return;
+            }
+            
+            // Clear previous QR code
+            qrDiv.innerHTML = '';
+            
+            // Generate new QR code
+            qrCode = new QRCode(qrDiv, {
+                text: link,
+                width: 250,
+                height: 250,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            downloadBtn.classList.remove('hidden');
+        }
+        
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (!canvas) {
+                alert('Pehle QR code banaao!');
+                return;
+            }
+            
+            const url = canvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'qrcode.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+        
+        // Generate QR on Enter key
+        document.getElementById('linkInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateQR();
+            }
+        });
+        
+        // Generate initial QR code when page loads
+        window.onload = function() {
+            generateQR();
+        };
+    </script>
 </body>
 </html>
